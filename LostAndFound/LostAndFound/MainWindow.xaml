@@ -1,18 +1,8 @@
-﻿<Window x:Class="MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="MainWindow" Height="350" Width="525">
+﻿<Window x:Class="LostAndFound.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TabControl>
-            <TabItem Header="ReportFound">
-                The Cheese Tab
-            </TabItem>
-            <TabItem Header="SearchForLostItem">
-                The Pepperoni Tab
-            </TabItem>
-            <TabItem Header="ViewExpiredItems">
-                The Mushrooms Tab
-            </TabItem>
-        </TabControl>
+        
     </Grid>
 </Window>

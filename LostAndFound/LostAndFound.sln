@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "LostAndFound", "LostAndFound\LostAndFound.vbproj", "{94485527-F36C-438B-8EC3-78503817CBE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LostAndFound", "LostAndFound\LostAndFound.csproj", "{292DF760-7D8F-444B-B836-0338B987EA69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{94485527-F36C-438B-8EC3-78503817CBE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94485527-F36C-438B-8EC3-78503817CBE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94485527-F36C-438B-8EC3-78503817CBE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94485527-F36C-438B-8EC3-78503817CBE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{292DF760-7D8F-444B-B836-0338B987EA69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{292DF760-7D8F-444B-B836-0338B987EA69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{292DF760-7D8F-444B-B836-0338B987EA69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{292DF760-7D8F-444B-B836-0338B987EA69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
