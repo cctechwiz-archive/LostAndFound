@@ -1,8 +1,19 @@
 ﻿<Window x:Class="LostAndFound.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        xmlns:views="clr-namespace:LostAndFound.Views"
+        Title="MainWindow" Height="550" Width="725">
     <Grid>
-        
+        <TabControl>
+            <TabItem Header="ReportFound">
+                <views:ReportFoundView></views:ReportFoundView>
+            </TabItem>
+            <TabItem Header="SearchForLostItem">
+                
+            </TabItem>
+            <TabItem Header="ViewExpiredItems">
+                
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
