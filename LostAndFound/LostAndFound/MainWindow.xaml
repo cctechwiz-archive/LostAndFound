@@ -6,13 +6,13 @@
     <Grid>
         <TabControl>
             <TabItem Header="ReportFound">
-                <views:ReportFoundView></views:ReportFoundView>
+                <views:ReportFoundView />
             </TabItem>
             <TabItem Header="SearchForLostItem">
-                
+                <views:SearchForLostItemView />
             </TabItem>
             <TabItem Header="ViewExpiredItems">
-                
+                <!--<views:ViewExpiredItemsView />-->
             </TabItem>
         </TabControl>
     </Grid>
