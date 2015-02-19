@@ -8,19 +8,27 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500" />
+            <ColumnDefinition Width="300" />
             <ColumnDefinition Width="200" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" Grid.Column="0">
-            
+        <StackPanel Orientation="Vertical" Grid.Column="0" Margin="25,25,25,25">
+            <TextBox />
+            <ListView/>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Column="1">
-            
+        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="25,25,25,25">
+            <ComboBox Text="Category">
+                <ComboBoxItem Name="cbi1">Item1</ComboBoxItem>
+                <ComboBoxItem Name="cbi2">Item2</ComboBoxItem>
+                <ComboBoxItem Name="cbi3">Item3</ComboBoxItem>
+            </ComboBox>
+            <CheckBox>Show disposed</CheckBox>
         </StackPanel>
-        
-        <Button Grid.Column="2">
-            <TextBlock Text="File as Lost"/>
-        </Button>
+        <StackPanel Grid.Column="2" Orientation="Vertical" Margin="25,25,35,25" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <!--TODO: Add Command={Binding FileAsLostCommand}-->
+            <Button Padding="25,10,25,10">
+                <TextBlock Text="File as Lost"/>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>
