@@ -56,8 +56,20 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModels\ReportFoundViewModel.cs" />
+    <Compile Include="Views\Controls\ExpiredItemActionUserControl.xaml.cs">
+      <DependentUpon>ExpiredItemActionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ExpiredTagListUserControl.xaml.cs">
+      <DependentUpon>ExpiredTagListUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\LostItemReportUserControl.xaml.cs">
+      <DependentUpon>LostItemReportUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExpiredItemsView.xaml.cs">
       <DependentUpon>ExpiredItemsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\LostItemDetailsUserControl.xaml.cs">
+      <DependentUpon>LostItemDetailsUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReportFoundView.xaml.cs">
       <DependentUpon>ReportFoundView.xaml</DependentUpon>
@@ -80,7 +92,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Controls\ExpiredItemActionUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\ExpiredTagListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\LostItemReportUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ExpiredItemsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\LostItemDetailsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
