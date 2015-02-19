@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="LostAndFound.Views.ExpiredItemsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300" >
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Margin="25 25 25 25">
+            <ComboBox Text="View expired items from..."  Width="200" HorizontalAlignment="Left" IsEditable="True" IsReadOnly="True">
+                <ComboBoxItem Name="cbi1" >7 days ago</ComboBoxItem>
+                <ComboBoxItem Name="cbi2">30 days ago</ComboBoxItem>
+                <ComboBoxItem Name="cbi3">60 days ago</ComboBoxItem>
+                <ComboBoxItem Name="cbi4">90 days ago</ComboBoxItem>
+                <ComboBoxItem Name="cbi5">The beginning of time</ComboBoxItem>
+            </ComboBox>
+            
+            <!-- TODO: Below the combobox (whatever), we should add the expired tags UserControl. -->
+            
+        </StackPanel>
+        
+        <StackPanel Orientation="Vertical">
+            <!-- TODO: Add "Multiple items selected" UserControl -->
+        </StackPanel>
+    </Grid>
+</UserControl>

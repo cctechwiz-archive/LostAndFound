@@ -12,7 +12,7 @@
                 <views:SearchForLostItemView />
             </TabItem>
             <TabItem Header="ViewExpiredItems">
-                <!--<views:ViewExpiredItemsView />-->
+                <views:ExpiredItemsView />
             </TabItem>
         </TabControl>
     </Grid>
