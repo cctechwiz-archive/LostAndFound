@@ -1,0 +1,10 @@
+diff a/LostAndFound/LostAndFound/Views/Controls/LostItemDetailsUserControl.xaml.cs b/LostAndFound/LostAndFound/Views/Controls/LostItemDetailsUserControl.xaml.cs	(rejected hunks)
+@@ -13,7 +13,7 @@
+ using System.Windows.Navigation;
+ using System.Windows.Shapes;
+ 
+-namespace LostAndFound.Views.Controls
++namespace LostAndFound.Views
+ {
+     /// <summary>
+     /// Interaction logic for LostItemDetailsUserControl.xaml
