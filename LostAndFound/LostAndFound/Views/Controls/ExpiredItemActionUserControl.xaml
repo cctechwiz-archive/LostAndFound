@@ -7,6 +7,27 @@
       d:DesignHeight="300" d:DesignWidth="300">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="180"/>
+            <RowDefinition Height="20"/>
+            
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>            
+        </Grid.ColumnDefinitions>        
+        
+        <TextBlock Text="Items Selected:" Grid.Column="0" Grid.Row="1"/>
+        <TextBox Name="disposed" Height="20" Grid.Column="0" Grid.Row="2" />
+        <TextBlock Text="Example: DI, Surplus, etc." Grid.Column="0" Grid.Row="3"/>
+        <Button Content="Disposed Selected" Grid.Column="0" Grid.Row="5"/>
+        
+        <StackPanel HorizontalAlignment="Right" Width="10">
+            <Button Name="exit" Background="Red" BorderThickness="1" Click="Close" Margin="-12,0,0,0">×</Button>
+        </StackPanel>
         
     </Grid>
 </UserControl>
