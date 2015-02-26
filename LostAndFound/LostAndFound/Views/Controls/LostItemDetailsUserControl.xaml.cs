@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LostAndFound.Views.Controls
+namespace LostAndFound.Views
 {
     /// <summary>
     /// Interaction logic for LostItemDetailsUserControl.xaml
