@@ -22,6 +22,9 @@
             </ComboBox>
             
             <!-- TODO: Below the combobox (whatever), we should add the expired tags UserControl. -->
+            <local:ExpiredTagListUserControl Margin="0,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+
+            </local:ExpiredTagListUserControl>
             
         </StackPanel>
         
