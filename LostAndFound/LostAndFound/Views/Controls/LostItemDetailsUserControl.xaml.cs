@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 ///Carlee
 
-namespace LostAndFound.Views
+namespace LostAndFound.Views.Controls
 {
     /// <summary>
     /// Interaction logic for LostItemDetailsUserControl.xaml
