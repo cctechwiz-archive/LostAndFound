@@ -12,7 +12,7 @@
             <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" Margin="25 25 25 25">
+        <StackPanel Orientation="Vertical" Margin="25 25 25 25" Grid.Column="0">
             <ComboBox Text="View expired items from..."  Width="200" HorizontalAlignment="Left" IsEditable="True" IsReadOnly="True">
                 <ComboBoxItem Name="cbi1" >7 days ago</ComboBoxItem>
                 <ComboBoxItem Name="cbi2">30 days ago</ComboBoxItem>
@@ -28,9 +28,10 @@
             
         </StackPanel>
         
-        <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical" Grid.Column="1">
+            
             <!-- TODO: Add "Multiple items selected" UserControl -->
-           <!-- <local:ExpiredItemActionUserControl/>-->
+            <local:ExpiredItemActionUserControl/>
         </StackPanel>
     </Grid>
 </UserControl>

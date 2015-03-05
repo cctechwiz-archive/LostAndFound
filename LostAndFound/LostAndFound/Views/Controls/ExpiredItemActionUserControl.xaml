@@ -25,9 +25,10 @@
         <TextBlock Text="Example: DI, Surplus, etc." Grid.Column="0" Grid.Row="3"/>
         <Button Content="Disposed Selected" Grid.Column="0" Grid.Row="5"/>
         
-        <StackPanel HorizontalAlignment="Right" Width="10">
-            <Button Name="exit" Background="Red" BorderThickness="1" Click="Close" Margin="-12,0,0,0">×</Button>
-        </StackPanel>
+       <!--<StackPanel HorizontalAlignment="Right" Width="10">
+            <Button Name="exit" Background="Red" BorderThickness="1" Margin="-12,0,0,0">×</Button>-->
+            <!--Todo: Replace the click command to close the window-->
+       <!-- </StackPanel>-->
         
     </Grid>
 </UserControl>

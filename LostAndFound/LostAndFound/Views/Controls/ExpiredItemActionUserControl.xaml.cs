@@ -29,5 +29,10 @@ namespace LostAndFound.Views.Controls
         {
 
         }
+
+        private void Close(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
