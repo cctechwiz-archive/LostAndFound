@@ -24,5 +24,15 @@ namespace LostAndFound.Views.Controls
         {
             InitializeComponent();
         }
+
+        private void disposed_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Close(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
