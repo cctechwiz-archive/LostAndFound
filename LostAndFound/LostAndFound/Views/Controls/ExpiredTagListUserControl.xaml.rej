@@ -1,0 +1,19 @@
+diff a/LostAndFound/LostAndFound/Views/Controls/ExpiredTagListUserControl.xaml b/LostAndFound/LostAndFound/Views/Controls/ExpiredTagListUserControl.xaml	(rejected hunks)
+@@ -5,14 +5,8 @@
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       mc:Ignorable="d" 
+       d:DesignHeight="300" d:DesignWidth="300">
+-    <DataGrid HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Height="300" Width="300">
+-        <DataGrid.Columns>
+-            <DataGridTextColumn Header="Item" Width="70" Binding="{Binding Item}"></DataGridTextColumn>
+-            <DataGridTextColumn Header="Date" Width="70" Binding="{Binding Date}"></DataGridTextColumn>
+-            <DataGridTextColumn Header="Value" Width="260" Binding="{Binding Value}"></DataGridTextColumn>
+-            
+-        </DataGrid.Columns>      
+-    </DataGrid>
+-
+ 
++    <Grid>
++        
++    </Grid>
+ </UserControl>

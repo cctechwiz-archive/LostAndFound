@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModels="clr-namespace:LostAndFound.ViewModels"
+             xmlns:local="clr-namespace:LostAndFound.Views.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
+        
         <viewModels:ReportFoundViewModel></viewModels:ReportFoundViewModel>
     </UserControl.DataContext>
     <Grid Margin="10,10,10,10">
@@ -27,7 +29,8 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="2">
             <TextBlock Text="Possible matches..." />
-            <ListView Height="300"></ListView>
+            <local:LostItemReportUserControl></local:LostItemReportUserControl>
+            <!--<ListView Height="300"></ListView>-->
         </StackPanel>
     </Grid>
 </UserControl>
