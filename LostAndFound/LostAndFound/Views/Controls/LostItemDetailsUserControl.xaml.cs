@@ -13,8 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-///Carlee
-
 namespace LostAndFound.Views.Controls
 {
     /// <summary>
