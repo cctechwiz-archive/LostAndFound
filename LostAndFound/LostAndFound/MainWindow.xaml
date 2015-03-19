@@ -15,5 +15,10 @@
                 <views:ExpiredItemsView />
             </TabItem>
         </TabControl>
+        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Background="Transparent" BorderThickness="0">
+            <StackPanel>
+                <Image Source="Resources/help.png" Stretch="UniformToFill" Width="20" Height="20"></Image>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>
