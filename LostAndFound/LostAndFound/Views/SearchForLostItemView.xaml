@@ -10,20 +10,16 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="250" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="25,25,25,25">
             <TextBox />
+            <CheckBox Margin="0,2,0,7">Show disposed</CheckBox>
             <ListView/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="25,25,25,25">
-            <ComboBox Text="Category">
-                <ComboBoxItem Name="cbi1">Item1</ComboBoxItem>
-                <ComboBoxItem Name="cbi2">Item2</ComboBoxItem>
-                <ComboBoxItem Name="cbi3">Item3</ComboBoxItem>
-            </ComboBox>
-            <CheckBox>Show disposed</CheckBox>
+            
             <local:LostItemDetailsUserControl></local:LostItemDetailsUserControl>
         </StackPanel>
         <StackPanel Grid.Column="2" Orientation="Vertical" Margin="25,25,35,25" HorizontalAlignment="Right" VerticalAlignment="Bottom">
