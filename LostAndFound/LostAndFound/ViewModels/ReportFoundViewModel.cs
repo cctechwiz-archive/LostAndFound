@@ -13,7 +13,7 @@ namespace LostAndFound.ViewModels
             //var dtExcel = new DataTable();
 
             //dtExcel.TableName = "MyExcelData";
-
+            ////To get this to work you need to download and install the following: http://www.microsoft.com/en-us/download/details.aspx?id=13255
             //string SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\git\LostAndFound\LostAndFound\LostAndFound\Resources\LostAndFound.xlsx';Extended Properties= 'Excel 12.0 Xml;HDR=Yes;IMEX=1'";
 
             //OleDbConnection con = new OleDbConnection(SourceConstr);
