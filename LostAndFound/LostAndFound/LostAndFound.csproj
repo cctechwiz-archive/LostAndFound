@@ -71,11 +71,17 @@
     <Compile Include="Views\Controls\LostItemDetailsUserControl.xaml.cs">
       <DependentUpon>LostItemDetailsUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FileAsLost.xaml.cs">
+      <DependentUpon>FileAsLost.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ReportFoundView.xaml.cs">
       <DependentUpon>ReportFoundView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchForLostItemView.xaml.cs">
       <DependentUpon>SearchForLostItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportsTab.xaml.cs">
+      <DependentUpon>ReportsTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\ClaimItemWindow.xaml.cs">
       <DependentUpon>ClaimItemWindow.xaml</DependentUpon>
@@ -112,11 +118,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FileAsLost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ReportFoundView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchForLostItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportsTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -151,6 +165,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\help.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

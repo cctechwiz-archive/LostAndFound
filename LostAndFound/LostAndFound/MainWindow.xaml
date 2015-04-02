@@ -5,15 +5,23 @@
         Title="MainWindow" Height="550" Width="825">
     <Grid>
         <TabControl>
-            <TabItem Header="ReportFound">
-                <views:ReportFoundView />
-            </TabItem>
-            <TabItem Header="SearchForLostItem">
+            <TabItem Header="Search For Lost Item">
                 <views:SearchForLostItemView />
             </TabItem>
-            <TabItem Header="ViewExpiredItems">
+            <TabItem Header="Report Found">
+                <views:ReportFoundView />
+            </TabItem>
+            <TabItem Header="Reports">
+                <views:ExpiredItemsView />
+            </TabItem>
+            <TabItem Header="View Expired Items">
                 <views:ExpiredItemsView />
             </TabItem>
         </TabControl>
+        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Background="Transparent" BorderThickness="0" Click="clickHelp">
+            <StackPanel>
+                <Image Source="Resources/help.png" Stretch="UniformToFill" Width="20" Height="20"></Image>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>

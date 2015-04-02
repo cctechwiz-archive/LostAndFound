@@ -13,20 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LostAndFound
+namespace LostAndFound.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for FileAsLost.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FileAsLost : Window
     {
-        public MainWindow()
+        public FileAsLost()
         {
             InitializeComponent();
-        }
-
-        void clickHelp(Object sender, EventArgs e){
-            System.Diagnostics.Process.Start(@"help.pdf");
         }
     }
 }
