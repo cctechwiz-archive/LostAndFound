@@ -20,6 +20,7 @@
         </ResourceDictionary>
 
     </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />
@@ -37,9 +38,11 @@
         </StackPanel>
         <StackPanel Grid.Column="2" Orientation="Vertical" Margin="25,25,35,25" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <!--TODO: Add Command={Binding FileAsLostCommand}-->
-            <Button Padding="25,10,25,10">
-                <TextBlock Text="File as Lost"/>
-            </Button>
+            
+                <Button Padding="25,10,25,10" Style="{StaticResource ButtonStyle}" >
+                    <TextBlock Text="File as Lost"/>
+                </Button>
+            
         </StackPanel>
     </Grid>
 </UserControl>

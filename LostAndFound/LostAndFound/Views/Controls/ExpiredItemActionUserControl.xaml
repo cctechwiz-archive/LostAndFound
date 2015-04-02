@@ -25,19 +25,22 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="180"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
             
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>            
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>        
         
-        <TextBlock Text="Items Selected:" Grid.Column="0" Grid.Row="1"/>
-        <TextBox Name="disposed" Height="20" Grid.Column="0" Grid.Row="2" />
+        <TextBlock Text="Items Selected:" Grid.Column="0"  Grid.Row="1"/>
+        <TextBox Name="disposed" Height="20" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" />
         <TextBlock Text="Example: DI, Surplus, etc." Grid.Column="0" Grid.Row="3"/>
-        <Button Content="Disposed Selected" Grid.Column="0" Grid.Row="5" Width="130"/>
+
+        <Button Content="Disposed Selected" Width="120" Height="30" Grid.Column="1" Grid.Row="5" Style="{StaticResource ButtonStyle}"/>
+
         
        <!--<StackPanel HorizontalAlignment="Right" Width="10">
             <Button Name="exit" Background="Red" BorderThickness="1" Margin="-12,0,0,0">×</Button>-->
