@@ -30,7 +30,6 @@
         <StackPanel Orientation="Vertical" Grid.Column="2">
             <TextBlock Text="Possible matches..." />
             <local:LostItemReportUserControl></local:LostItemReportUserControl>
-            <!--<ListView Height="300"></ListView>-->
         </StackPanel>
     </Grid>
 </UserControl>
