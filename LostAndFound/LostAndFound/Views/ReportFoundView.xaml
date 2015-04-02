@@ -7,22 +7,40 @@
              xmlns:local="clr-namespace:LostAndFound.Views.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
     <UserControl.DataContext>
         
         <viewModels:ReportFoundViewModel></viewModels:ReportFoundViewModel>
     </UserControl.DataContext>
     <Grid Margin="10,10,10,10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0">
-            <TextBlock Text="Add Description Tags" />
-            <TextBox Width="150" />
+            <TextBlock Text="Item Description" Padding="5,0,0,0"/>
+            <TextBox Width="140" />
             
-            <TextBlock Text="Add Location Tags" Padding="0,15,0,0"/>
-            <TextBox Width="150" />
+            <TextBlock Text="Found Location" Padding="5,15,0,0"/>
+            <TextBox Width="140"/>
+
+
+            <TextBlock Text="Storage Location" Padding="5,15,0,0"/>
+            <TextBox Width="140"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1">
             <!-- TODO: Add tag stuff here. -->

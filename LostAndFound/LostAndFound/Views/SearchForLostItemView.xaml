@@ -7,30 +7,42 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="250" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="25,25,25,25">
             <TextBox />
+            <CheckBox Margin="0,2,0,7">Show disposed</CheckBox>
             <ListView/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="25,25,25,25">
-            <ComboBox Text="Category">
-                <ComboBoxItem Name="cbi1">Item1</ComboBoxItem>
-                <ComboBoxItem Name="cbi2">Item2</ComboBoxItem>
-                <ComboBoxItem Name="cbi3">Item3</ComboBoxItem>
-            </ComboBox>
-            <CheckBox>Show disposed</CheckBox>
+            
             <local:LostItemDetailsUserControl></local:LostItemDetailsUserControl>
         </StackPanel>
         <StackPanel Grid.Column="2" Orientation="Vertical" Margin="25,25,35,25" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <!--TODO: Add Command={Binding FileAsLostCommand}-->
-            <Button Padding="25,10,25,10">
-                <TextBlock Text="File as Lost"/>
-            </Button>
+            
+                <Button Padding="25,10,25,10" Style="{StaticResource ButtonStyle}" >
+                    <TextBlock Text="File as Lost"/>
+                </Button>
+            
         </StackPanel>
     </Grid>
 </UserControl>
