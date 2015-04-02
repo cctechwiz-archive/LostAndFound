@@ -55,6 +55,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\ClaimedItem.cs" />
+    <Compile Include="Models\DescriptionTag.cs" />
+    <Compile Include="Models\DisposedItem.cs" />
+    <Compile Include="Models\DisposedTag.cs" />
+    <Compile Include="Models\FoundItem.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\LocationTag.cs" />
+    <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="ViewModels\ReportFoundViewModel.cs" />
     <Compile Include="Views\Controls\ExpiredItemActionUserControl.xaml.cs">
       <DependentUpon>ExpiredItemActionUserControl.xaml</DependentUpon>
