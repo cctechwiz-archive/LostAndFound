@@ -6,7 +6,20 @@
       mc:Ignorable="d" 
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       d:DesignHeight="200" d:DesignWidth="200">
-
+    <UserControl.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="ButtonBorder" Width="50" Height="30" CornerRadius="10" BorderThickness="1" BorderBrush="Gray" Background="LightGray" >
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -28,7 +41,7 @@
             <TextBlock Text="Found at: " />
             <TextBox Width="50" HorizontalAlignment="Left"/>
         </StackPanel>
-        <Button Padding="8,8,8,8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="3">
+        <Button Padding="8,8,8,8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="3" Style="{StaticResource ButtonStyle}">
             <TextBlock Text="Claim"/>
         </Button>
 
