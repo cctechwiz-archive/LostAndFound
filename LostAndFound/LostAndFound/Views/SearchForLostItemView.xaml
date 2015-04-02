@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="25,25,25,25">
             <TextBox />
-            <ListView Name="LV"/>
+            <ListView/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="25,25,25,25">
             <ComboBox Text="Category">

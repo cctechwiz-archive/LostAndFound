@@ -25,7 +25,5 @@ namespace LostAndFound.Views
         {
             InitializeComponent();
         }
-
-        
     }
 }
