@@ -26,14 +26,11 @@ namespace LostAndFound.Services
             this.usersConnection = new OleDbConnection(SourceConstr);
 
             this.usersAdapter = new OleDbDataAdapter(usersQuery, usersConnection);
+            this.usersAdapter.Fill(dtExcel);
         }
 
         public List<User> GetUsers()
         {
-            OleDbDataAdapter data = new OleDbDataAdapter(usersQuery, usersConnection);
-
-            data.Fill(dtExcel);
-
             var Users = new List<User>();
 
             for (int i = 0; i < dtExcel.Rows.Count; i++)
@@ -54,16 +51,12 @@ namespace LostAndFound.Services
 
         public User CreateNewUser(string firstName, string lastName, string phone)
         {
-            OleDbDataAdapter adapter = new OleDbDataAdapter(usersQuery, usersConnection);
-
-            adapter.Fill(dtExcel);
-
             var insertCommandString = "INSERT INTO [Users$] (FirstName, LastName, PhoneNumber) VALUES (?, ?, ?)";
-            adapter.InsertCommand = new OleDbCommand(insertCommandString, usersConnection);
+            usersAdapter.InsertCommand = new OleDbCommand(insertCommandString, usersConnection);
 
-            adapter.InsertCommand.Parameters.Add("@FirstName", OleDbType.VarChar, 255).SourceColumn = "FirstName";
-            adapter.InsertCommand.Parameters.Add("@LastName", OleDbType.VarChar, 255).SourceColumn = "LastName";
-            adapter.InsertCommand.Parameters.Add("@PhoneNumber", OleDbType.VarChar, 20).SourceColumn = "PhoneNumber";
+            usersAdapter.InsertCommand.Parameters.Add("@FirstName", OleDbType.VarChar, 255).SourceColumn = "FirstName";
+            usersAdapter.InsertCommand.Parameters.Add("@LastName", OleDbType.VarChar, 255).SourceColumn = "LastName";
+            usersAdapter.InsertCommand.Parameters.Add("@PhoneNumber", OleDbType.VarChar, 20).SourceColumn = "PhoneNumber";
 
             DataRow newPersonRow = dtExcel.NewRow();
             newPersonRow["FirstName"] = firstName;
@@ -71,11 +64,30 @@ namespace LostAndFound.Services
             newPersonRow["PhoneNumber"] = phone;
 
             dtExcel.Rows.Add(newPersonRow);
-            adapter.Update(dtExcel);
+            usersAdapter.Update(dtExcel);
 
             User newUser = new User(firstName, lastName, phone);
 
             return newUser;
+        }
+
+        public void UpdateUser(User oldUser, User newUser)
+        {
+            var updateCommandString = "UPDATE [Users$] SET FirstName = ?, LastName = ?, PhoneNumber = ? " +
+                                      "WHERE FirstName = ? AND LastName = ? AND PhoneNumber = ?";
+            usersAdapter.UpdateCommand = new OleDbCommand(updateCommandString, usersConnection);
+
+            //RANDAY - How do we know what row this User came from? Should we first run a query to find out the row number, orrr...? (Nora was here)
+
+            usersAdapter.UpdateCommand.Parameters.Add("@FirstName", OleDbType.VarChar, 255).Value = "XXXXX";
+            usersAdapter.UpdateCommand.Parameters.Add("@LastName", OleDbType.VarChar, 255).Value = "XXXXXX";
+            usersAdapter.UpdateCommand.Parameters.Add("@PhoneNumber", OleDbType.VarChar, 20).Value = "XXXXX-590-5555";
+
+            usersAdapter.UpdateCommand.Parameters.Add("@OldFirstName", OleDbType.VarChar, 255, "FirstName").Value = "Jesse";
+            usersAdapter.UpdateCommand.Parameters.Add("@OldLastName", OleDbType.VarChar, 255, "LastName").Value = "Maxwell";
+            usersAdapter.UpdateCommand.Parameters.Add("@OldPhoneNumber", OleDbType.VarChar, 20, "PhoneNumber").Value = "435-590-5555";
+
+            usersAdapter.Update(dtExcel);
         }
     }
 }
