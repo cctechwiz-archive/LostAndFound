@@ -29,10 +29,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-                <Button Height="25" Grid.Column="0" Style="{StaticResource ButtonStyle}">
+                <Button Height="25" Grid.Column="0">
                     <TextBlock Text="Notify All"/>
                 </Button>
-                <Button Height="40" Padding="0,10,0,10" Grid.Column="2" Style="{StaticResource ButtonStyle}">
+                <Button Height="40" Padding="0,10,0,10" Grid.Column="2">
                     <TextBlock Text="Print Ticket"/>
                 </Button>
             </Grid>

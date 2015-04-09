@@ -44,7 +44,7 @@
             <TextBox Width="100" HorizontalAlignment="Left"/>
         </StackPanel>
 
-        <Button Padding="8,8,8,8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="3" Style="{StaticResource ButtonStyle}">
+        <Button Padding="8,8,8,8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="3" >
 
             <TextBlock Text="Claim"/>
         </Button>
