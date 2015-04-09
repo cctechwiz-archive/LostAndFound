@@ -46,6 +46,7 @@
 
         <Button Padding="8,8,8,8" VerticalAlignment="Bottom" Grid.Row="4" Margin="79,0,79,63">
 
+
             <TextBlock Text="Claim"/>
         </Button>
 
