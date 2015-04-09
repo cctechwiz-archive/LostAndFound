@@ -39,7 +39,7 @@
         <TextBox Name="disposed" Height="20" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" />
         <TextBlock Text="Example: DI, Surplus, etc." Grid.Column="0" Grid.Row="3"/>
 
-        <Button Content="Disposed Selected" Width="120" Height="30" Grid.Column="1" Grid.Row="5" Style="{StaticResource ButtonStyle}"/>
+        <Button Content="Disposed Selected" Width="120" Height="30" Grid.Column="1" Grid.Row="5"/>
 
         
        <!--<StackPanel HorizontalAlignment="Right" Width="10">

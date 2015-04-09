@@ -7,7 +7,7 @@
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       d:DesignHeight="200" d:DesignWidth="200">
 
- <UserControl.Resources>
+    <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
@@ -44,7 +44,7 @@
             <TextBox Width="100" HorizontalAlignment="Left"/>
         </StackPanel>
 
-        <Button Padding="8,8,8,8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="3" Style="{StaticResource ButtonStyle}">
+        <Button Padding="8,8,8,8" VerticalAlignment="Bottom" Grid.Row="4" Margin="79,0,79,63">
 
             <TextBlock Text="Claim"/>
         </Button>
