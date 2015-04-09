@@ -1,15 +1,24 @@
-﻿namespace LostAndFound.Models
+﻿using System.Runtime.Versioning;
+
+namespace LostAndFound.Models
 {
     public class User
     {
-        private string FirstName { get; set; }
+        public User(string fname, string lname, string phone)
+        {
+            FirstName = fname;
+            LastName = lname;
+            PhoneNumber = phone;
+        }
 
-        private string LastName { get; set; }
+        public string FirstName { get; set; }
 
-        private string Email { get; set; }
+        public string LastName { get; set; }
 
-        private string PhoneNumber { get; set; }
+        public string Email { get; set; }
 
-        private string TNumber { get; set; }
+        public string PhoneNumber { get; set; }
+
+        public string TNumber { get; set; }
     }
 }

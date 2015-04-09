@@ -22,7 +22,7 @@
 
     </UserControl.Resources>
     <UserControl.DataContext>
-        
+
         <viewModels:ReportFoundViewModel></viewModels:ReportFoundViewModel>
     </UserControl.DataContext>
     <Grid Margin="10,10,10,10">
@@ -34,7 +34,7 @@
         <StackPanel Orientation="Vertical" Grid.Column="0">
             <TextBlock Text="Item Description" Padding="5,0,0,0"/>
             <TextBox Width="140" />
-            
+
             <TextBlock Text="Found Location" Padding="5,15,0,0"/>
             <TextBox Width="140"/>
 
@@ -47,7 +47,18 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="2">
             <TextBlock Text="Possible matches..." />
-            <local:LostItemReportUserControl></local:LostItemReportUserControl>
+            <ListView x:Name="UsersList" ItemsSource="{Binding Users}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="FirstName" DisplayMemberBinding="{Binding FirstName}"/>
+                        <GridViewColumn Header="LastName" DisplayMemberBinding="{Binding LastName}"/>
+                        <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
+                        <GridViewColumn Header="PhoneNumber" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                        <GridViewColumn Header="TNumber" DisplayMemberBinding="{Binding TNumber}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <!--<local:LostItemReportUserControl></local:LostItemReportUserControl>-->
         </StackPanel>
     </Grid>
 </UserControl>
