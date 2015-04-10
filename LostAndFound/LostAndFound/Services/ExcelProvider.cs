@@ -15,7 +15,7 @@ namespace LostAndFound.Services
         private OleDbConnection usersConnection;
         private OleDbDataAdapter usersAdapter;
 
-        public ExcelProvider(string file = @"C:\git\LostAndFound\LostAndFound\LostAndFound\Resources\LostAndFound.xlsx")
+        public ExcelProvider(string file = @"C:\Users\Bryan\Documents\LostAndFound\LostAndFound\LostAndFound\Resources\LostAndFound.xlsx")
         {
             this.dtExcel = new DataTable();
             var filePath = file;
@@ -73,21 +73,16 @@ namespace LostAndFound.Services
 
         public void UpdateUser(User oldUser, User newUser)
         {
-            var updateCommandString = "UPDATE [Users$] SET FirstName = ?, LastName = ?, PhoneNumber = ? " +
-                                      "WHERE FirstName = ? AND LastName = ? AND PhoneNumber = ?";
-            usersAdapter.UpdateCommand = new OleDbCommand(updateCommandString, usersConnection);
-
+            var updateCommandString = "UPDATE [Users$] SET FirstName = '" + newUser.FirstName + "', LastName = '" + newUser.LastName + "', PhoneNumber = '" + newUser.PhoneNumber + "' " +
+                                      "WHERE FirstName = '" + oldUser.FirstName + "' AND LastName = '" + oldUser.LastName + "' AND PhoneNumber = '" + oldUser.PhoneNumber + "'";
+            //usersAdapter.UpdateCommand = new OleDbCommand(updateCommandString, usersConnection);
+            System.Data.OleDb.OleDbCommand myCommand = new System.Data.OleDb.OleDbCommand();
             //RANDAY - How do we know what row this User came from? Should we first run a query to find out the row number, orrr...? (Nora was here)
-
-            usersAdapter.UpdateCommand.Parameters.Add("@FirstName", OleDbType.VarChar, 255).Value = "XXXXX";
-            usersAdapter.UpdateCommand.Parameters.Add("@LastName", OleDbType.VarChar, 255).Value = "XXXXXX";
-            usersAdapter.UpdateCommand.Parameters.Add("@PhoneNumber", OleDbType.VarChar, 20).Value = "XXXXX-590-5555";
-
-            usersAdapter.UpdateCommand.Parameters.Add("@OldFirstName", OleDbType.VarChar, 255, "FirstName").Value = "Jesse";
-            usersAdapter.UpdateCommand.Parameters.Add("@OldLastName", OleDbType.VarChar, 255, "LastName").Value = "Maxwell";
-            usersAdapter.UpdateCommand.Parameters.Add("@OldPhoneNumber", OleDbType.VarChar, 20, "PhoneNumber").Value = "435-590-5555";
-
-            usersAdapter.Update(dtExcel);
+            usersConnection.Open();
+            myCommand.Connection = usersConnection;
+            myCommand.CommandText = updateCommandString;
+            myCommand.ExecuteNonQuery();
+            usersConnection.Close();
         }
     }
 }
