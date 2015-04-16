@@ -4,6 +4,8 @@ using System.Data.OleDb;
 using System.Dynamic;
 using System.Windows.Documents;
 using LostAndFound.Models;
+using Microsoft.Win32;
+using System.Windows.Forms;
 
 namespace LostAndFound.Services
 {
@@ -15,11 +17,11 @@ namespace LostAndFound.Services
         private OleDbConnection usersConnection;
         private OleDbDataAdapter usersAdapter;
 
-        public ExcelProvider(string file = @"C:\git\LostAndFound\LostAndFound\LostAndFound\Resources\LostAndFound.xlsx")
+        public ExcelProvider(string file = @"./LostAndFound.xlsx")
         {
             this.dtExcel = new DataTable();
             var filePath = file;
-
+     
             //To get this to work you need to download and install the following: http://www.microsoft.com/en-us/download/details.aspx?id=13255
             var SourceConstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source='" + filePath + "';Extended Properties= 'Excel 12.0 Xml;HDR=Yes;'";
 

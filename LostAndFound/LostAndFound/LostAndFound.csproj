@@ -90,7 +90,7 @@
     <Compile Include="Views\FileAsLost.xaml.cs">
       <DependentUpon>FileAsLost.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ReportFoundView.xaml.cs">
+    <Compile Include="Views\Windows\ReportFoundView.xaml.cs">
       <DependentUpon>ReportFoundView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchForLostItemView.xaml.cs">
@@ -142,7 +142,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ReportFoundView.xaml">
+    <Page Include="Views\Windows\ReportFoundView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

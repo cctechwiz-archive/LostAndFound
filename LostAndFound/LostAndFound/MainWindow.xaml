@@ -13,6 +13,7 @@
     </Window.Resources>
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
+            <MediaElement Name="fileBrowser" Height="400" />
             <Button>
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20"

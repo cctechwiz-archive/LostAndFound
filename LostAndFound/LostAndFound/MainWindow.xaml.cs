@@ -24,10 +24,18 @@ namespace LostAndFound
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
-        void clickHelp(Object sender, EventArgs e){
+        void clickHelp(Object sender, EventArgs e)
+        {
             System.Diagnostics.Process.Start(@"help.pdf");
+        }
+
+        public void getFiles()
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.
         }
     }
 }
