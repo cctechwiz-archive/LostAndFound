@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.OleDb;
 using LostAndFound.Models;
 
-namespace LostAndFound.Services
+namespace LostAndFound.Services.Providers
 {
     class ItemProvider
     {
@@ -50,11 +50,7 @@ namespace LostAndFound.Services
                     user.LastName = name[1];
                 }
 
-                var item = new LostItem(date, descriptionTags, user)
-                {
-                    LocationTags = locationTags,
-                    Recorder = dataArray[6].ToString()
-                };
+                var item = new LostItem(date, descriptionTags, locationTags, user, dataArray[6].ToString());
 
                 items.Add(item);
             }
@@ -63,7 +59,7 @@ namespace LostAndFound.Services
         }
 
 
-        public LostItem CreateLostItem(DateTime date, string description, string location, User owner, string recorder )
+        public LostItem CreateLostItem(DateTime date, string description, string location, string name, string phonenumber, string email, string recorder)
         {
             var insertCommandString = "INSERT INTO [LostReports$] (Date, ItemDescription, LocationLost, LostBy, PhoneNumber, EmailAddress, RecordedBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             this.itemsAdapert.InsertCommand = new OleDbCommand(insertCommandString, itemsConnection);
@@ -78,11 +74,11 @@ namespace LostAndFound.Services
 
             DataRow newItemRow = itemsTable.NewRow();
             newItemRow["Date"] = date.ToString();
-            newItemRow["ItemDescription"] = description;
-            newItemRow["LocationLost"] = location;
-            newItemRow["LostBy"] = owner;
-            newItemRow["PhoneNumber"] = owner.PhoneNumber;
-            newItemRow["EmailAddress"] = owner.Email;
+            newItemRow["ItemDescription"] = description.ToLower();
+            newItemRow["LocationLost"] = location.ToLower();
+            newItemRow["LostBy"] = name;
+            newItemRow["PhoneNumber"] = phonenumber;
+            newItemRow["EmailAddress"] = email;
             newItemRow["RecordedBy"] = recorder;
 
             itemsTable.Rows.Add(newItemRow);
@@ -91,8 +87,19 @@ namespace LostAndFound.Services
             var descriptionTags = GenerateDescriptionTagsFromString(description);
             var locationTags = GenerateLocationTagsFromString(location);
 
-            LostItem newItem = new LostItem();
+            var splitname = name.Split(' ');
+            var user = new User(splitname[0], phonenumber)
+            {
+                Email = email
+            };
+            if (null == splitname[1])
+            {
+                user.LastName = splitname[1];
+            }
 
+            var newItem = new LostItem(date, descriptionTags, locationTags, user, recorder);
+
+            return newItem;
         }
 
 

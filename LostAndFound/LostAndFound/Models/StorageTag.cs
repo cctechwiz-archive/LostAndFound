@@ -7,5 +7,4 @@
             this.Name = name;
         }
     }
-    }
 }

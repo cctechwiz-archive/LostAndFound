@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.OleDb;
 using LostAndFound.Models;
 
-namespace LostAndFound.Services
+namespace LostAndFound.Services.Providers
 {
     class UserProvider
     {
