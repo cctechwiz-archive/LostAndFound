@@ -6,15 +6,15 @@ using LostAndFound.Models;
 
 namespace LostAndFound.Services.Providers
 {
-    class ItemProvider
+    class FoundItemProvider
     {
-        private readonly string itemsQuery = "Select * from [LostReports$]";
+        private readonly string itemsQuery = "Select * from [FoundReport$]";
 
         private DataTable itemsTable;
         private OleDbConnection itemsConnection;
         private OleDbDataAdapter itemsAdapert;
 
-        public ItemProvider(string file = @"C:\Users\Bryan\Documents\LostAndFound\LostAndFound\LostAndFound\Resources\LostAndFound.xlsx")
+        public FoundItemProvider(string file = @"C:\Users\Bryan\Documents\LostAndFound\LostAndFound\LostAndFound\Resources\LostAndFoundDatabase.xlsx")
         {
             this.itemsTable = new DataTable();
             var filePath = file;
@@ -26,9 +26,9 @@ namespace LostAndFound.Services.Providers
             this.itemsAdapert.Fill(this.itemsTable);
         }
 
-        public List<LostItem> GetLostItems()
+        public List<FoundItem> GetFoundItems()
         {
-            var items = new List<LostItem>();
+            var items = new List<FoundItem>();
 
             for (var i = 0; i < itemsTable.Rows.Count; i++)
             {
@@ -50,7 +50,7 @@ namespace LostAndFound.Services.Providers
                     user.LastName = name[1];
                 }
 
-                var item = new LostItem(date, descriptionTags, locationTags, user, dataArray[6].ToString());
+                var item = new FoundItem(date, descriptionTags, locationTags, name, dataArray[6].ToString());
 
                 items.Add(item);
             }
@@ -59,9 +59,9 @@ namespace LostAndFound.Services.Providers
         }
 
 
-        public LostItem CreateLostItem(DateTime date, string description, string location, string name, string phonenumber, string email, string recorder)
+        public FoundItem CreateFoundItem(DateTime date, string description, string location, string name, string phonenumber, string email, string recorder)
         {
-            var insertCommandString = "INSERT INTO [LostReports$] (Date, ItemDescription, LocationLost, LostBy, PhoneNumber, EmailAddress, RecordedBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            var insertCommandString = "INSERT INTO [FoundReport$] (Date, ItemDescription, LocationLost, LostBy, PhoneNumber, EmailAddress, RecordedBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             this.itemsAdapert.InsertCommand = new OleDbCommand(insertCommandString, itemsConnection);
 
             itemsAdapert.InsertCommand.Parameters.Add("@Date", OleDbType.VarChar, 255).SourceColumn = "Date";
@@ -97,11 +97,24 @@ namespace LostAndFound.Services.Providers
                 user.LastName = splitname[1];
             }
 
-            var newItem = new LostItem(date, descriptionTags, locationTags, user, recorder);
+            var newItem = new FoundItem(date, descriptionTags, locationTags, user, recorder);
 
             return newItem;
         }
 
+        public void UpdateLostItem(FoundItem oldFoundItem, FoundItem newFoundItem)
+        {
+            var updateCommandString = "UPDATE [LostReports$] SET Date = '" + newFoundItem.DateReported + "', ItemDescription = '" + newFoundItem.DescriptionTags + "', LocationLost = '" + newFoundItem.LocationTags +
+                                      "', RecordedBy = '" + newFoundItem.Recorder + "' " +
+                                      "WHERE Date = '" + oldFoundItem.DateReported + "', ItemDescription = '" + oldFoundItem.DescriptionTags + "', LocationLost = '" + oldFoundItem.LocationTags +
+                                      "', RecordedBy = '" + oldFoundItem.Recorder + "'";
+            OleDbCommand myCommand = new OleDbCommand();
+            itemsConnection.Open();
+            myCommand.Connection = itemsConnection;
+            myCommand.CommandText = updateCommandString;
+            myCommand.ExecuteNonQuery();
+            itemsConnection.Close();
+        }
 
         //These generate Tag methods could be moved to a factory or constructor or something
         //Todo: Figure out how to do this kind of Generic creating
@@ -148,5 +161,7 @@ namespace LostAndFound.Services.Providers
 
             return tags;
         }
+
+
     }
 }
