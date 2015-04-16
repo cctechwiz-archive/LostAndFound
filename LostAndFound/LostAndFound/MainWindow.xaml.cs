@@ -31,11 +31,5 @@ namespace LostAndFound
         {
             System.Diagnostics.Process.Start(@"help.pdf");
         }
-
-        public void getFiles()
-        {
-            FileOpenPicker openPicker = new FileOpenPicker();
-            openPicker.
-        }
     }
 }

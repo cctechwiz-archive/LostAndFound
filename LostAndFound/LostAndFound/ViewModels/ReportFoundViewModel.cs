@@ -13,7 +13,7 @@ namespace LostAndFound.ViewModels
         {
         }
 
-        public List<User> Users { get; set; }
+        public List<Item> Items { get; set; }
 
         public String Text { get; set; }
 

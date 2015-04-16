@@ -84,9 +84,9 @@ namespace LostAndFound.Services.Providers
         public void UpdateLostItem(FoundItem oldFoundItem, FoundItem newFoundItem)
         {
             var updateCommandString = "UPDATE [LostReports$] SET Date = '" + newFoundItem.DateReported + "', ItemDescription = '" + newFoundItem.DescriptionTags + "', LocationLost = '" + newFoundItem.LocationTags +
-                                      "', FoundBy = '" + newFoundItem.Reportee + "' " +  "', RecordedBy = '" + newFoundItem.Recorder + "' " +
+                                      "', FoundBy = '" + newFoundItem.Reportee + "' " +  "', RecordedBy = '" + newFoundItem.Employee + "' " +
                                       "WHERE Date = '" + oldFoundItem.DateReported + "', ItemDescription = '" + oldFoundItem.DescriptionTags + "', LocationLost = '" + oldFoundItem.LocationTags +
-                                      "', FoundBy = '" + oldFoundItem.Reportee + "' " + "', RecordedBy = '" + oldFoundItem.Recorder + "'";
+                                      "', FoundBy = '" + oldFoundItem.Reportee + "' " + "', RecordedBy = '" + oldFoundItem.Employee + "'";
             OleDbCommand myCommand = new OleDbCommand();
             itemsConnection.Open();
             myCommand.Connection = itemsConnection;

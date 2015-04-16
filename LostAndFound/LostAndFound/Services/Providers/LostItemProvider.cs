@@ -40,17 +40,10 @@ namespace LostAndFound.Services.Providers
                 var descriptionTags = GenerateDescriptionTagsFromString(dataArray[1].ToString());
                 var locationTags = GenerateLocationTagsFromString(dataArray[2].ToString());
 
-                var name = dataArray[3].ToString().Split(' ');
-                var user = new User(name[0], dataArray[4].ToString())
-                {
-                    Email = dataArray[5].ToString(),
-                };
-                if(null != name[1])
-                {
-                    user.LastName = name[1];
-                }
+                var name = dataArray[3].ToString();
+                var employee = dataArray[6].ToString();
 
-                var item = new LostItem(date, descriptionTags, locationTags, user, dataArray[6].ToString());
+                var item = new LostItem(date, descriptionTags, locationTags, name, employee);
 
                 items.Add(item);
             }
@@ -86,18 +79,8 @@ namespace LostAndFound.Services.Providers
 
             var descriptionTags = GenerateDescriptionTagsFromString(description);
             var locationTags = GenerateLocationTagsFromString(location);
-
-            var splitname = name.Split(' ');
-            var user = new User(splitname[0], phonenumber)
-            {
-                Email = email
-            };
-            if (null == splitname[1])
-            {
-                user.LastName = splitname[1];
-            }
-
-            var newItem = new LostItem(date, descriptionTags, locationTags, user, recorder);
+        
+            var newItem = new LostItem(date, descriptionTags, locationTags, name, recorder);
 
             return newItem;
         }
@@ -105,9 +88,9 @@ namespace LostAndFound.Services.Providers
         public void UpdateLostItem(LostItem oldLostItem, LostItem newLostItem)
         {
             var updateCommandString = "UPDATE [LostReports$] SET Date = '" + newLostItem.DateReported + "', ItemDescription = '" + newLostItem.DescriptionTags + "', LocationLost = '" + newLostItem.LocationTags +
-                                      "', LostBy = '" + newLostItem.Owner + "', RecordedBy = '" + newLostItem.Recorder + "' " +
+                                      "', LostBy = '" + newLostItem.Name + "', RecordedBy = '" + newLostItem.Employee + "' " +
                                       "WHERE Date = '" + oldLostItem.DateReported + "', ItemDescription = '" + oldLostItem.DescriptionTags + "', LocationLost = '" + oldLostItem.LocationTags +
-                                      "', LostBy = '" + oldLostItem.Owner + "', RecordedBy = '" + oldLostItem.Recorder + "'";
+                                      "', LostBy = '" + oldLostItem.Name + "', RecordedBy = '" + oldLostItem.Employee + "'";
             OleDbCommand myCommand = new OleDbCommand();
             itemsConnection.Open();
             myCommand.Connection = itemsConnection;

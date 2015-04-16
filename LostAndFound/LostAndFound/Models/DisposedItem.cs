@@ -8,7 +8,5 @@ namespace LostAndFound.Models
         private DateTime Date { get; set; }
 
         private List<DisposedTag> Tags { get; set; }
-
-        private User User { get; set; }
     }
 }

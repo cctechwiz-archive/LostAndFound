@@ -36,9 +36,9 @@
             <TabItem Header="Report Found">
                 <views:ReportFoundView />
             </TabItem>
-            <TabItem Header="Reports">
+            <!--<TabItem Header="Reports">
                 <views:ExpiredItemsView />
-            </TabItem>
+            </TabItem>-->
             <TabItem Header="View Expired Items">
                 <views:ExpiredItemsView />
             </TabItem>

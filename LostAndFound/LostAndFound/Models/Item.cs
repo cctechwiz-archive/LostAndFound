@@ -13,6 +13,12 @@ namespace LostAndFound.Models
 
         public List<StorageTag> StorageTags { get; set; } 
 
-        public string Recorder { get; set; }
+        public string Employee { get; set; }
+
+        public string Name { get; set; }
+
+        public string Email { get; set; }
+
+        public string PhoneNumber { get; set; }
     }
 }

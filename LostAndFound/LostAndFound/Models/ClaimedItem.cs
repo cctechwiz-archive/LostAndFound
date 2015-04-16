@@ -5,13 +5,13 @@ namespace LostAndFound.Models
 {
     public class ClaimedItem : Item
     {
-        public ClaimedItem(DateTime date)
+        public ClaimedItem(DateTime date, string tnumber, string name)
         {
-            this.Date = date;
+            this.DateReported = date;
+            this.TNumber = tnumber;
+            this.Name = name;
         }
 
-        private DateTime Date { get; set; }
-
-        private User User { get; set; }
+        public string TNumber { get; set; }
     }
 }
