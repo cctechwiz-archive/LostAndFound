@@ -3,18 +3,17 @@ using System.Collections.Generic;
 
 namespace LostAndFound.Models
 {
-    public class FoundItem : Item
+    public class LostItem : Item
     {
-        public string Reportee { get; set; }
+        public User Owner { get; set; }
 
-        public FoundItem(DateTime date, List<DescriptionTag> descTags, List<LocationTag> locTags, string reportee, string recorder)
+        public LostItem(DateTime date, List<DescriptionTag> descTags, List<LocationTag> locTags, User owner, string recorder)
         {
             this.DateReported = date;
             this.DescriptionTags = descTags;
             this.LocationTags = locTags;
-            this.Reportee = reportee;
+            this.Owner = owner;
             this.Recorder = recorder;
         }
-
     }
 }

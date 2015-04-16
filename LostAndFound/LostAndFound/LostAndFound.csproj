@@ -65,12 +65,15 @@
     <Compile Include="Models\DescriptionTag.cs" />
     <Compile Include="Models\DisposedItem.cs" />
     <Compile Include="Models\DisposedTag.cs" />
+    <Compile Include="Models\StorageTag.cs" />
+    <Compile Include="Models\LostItem.cs" />
     <Compile Include="Models\FoundItem.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\LocationTag.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Services\ExcelProvider.cs" />
+    <Compile Include="Services\Providers\ItemProvider.cs" />
+    <Compile Include="Services\Providers\UserProvider.cs" />
     <Compile Include="ViewModels\ReportFoundViewModel.cs" />
     <Compile Include="Views\Controls\ExpiredItemActionUserControl.xaml.cs">
       <DependentUpon>ExpiredItemActionUserControl.xaml</DependentUpon>
@@ -197,6 +200,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Entypo-license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\Converters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

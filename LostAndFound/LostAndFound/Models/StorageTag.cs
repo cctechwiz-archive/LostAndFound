@@ -1,8 +1,8 @@
 ﻿namespace LostAndFound.Models
 {
-    public class LocationTag : Tag
+    public class StorageTag : Tag
     {
-        public LocationTag(string name)
+        public StorageTag(string name)
         {
             this.Name = name;
         }

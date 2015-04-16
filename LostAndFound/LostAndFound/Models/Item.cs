@@ -5,10 +5,14 @@ namespace LostAndFound.Models
 {
     public abstract class Item
     {
-        private DateTime DateReported { get; set; }
+        public DateTime DateReported { get; set; }
 
-        private List<Tag> Tags { get; set; }
+        public List<DescriptionTag> DescriptionTags { get; set; }
 
-        private User Reportee { get; set; }
+        public List<LocationTag> LocationTags { get; set; }
+
+        public List<StorageTag> StorageTags { get; set; } 
+
+        public string Recorder { get; set; }
     }
 }
