@@ -8,7 +8,7 @@ namespace LostAndFound.Services.Providers
 {
     class FoundItemProvider
     {
-        private readonly string itemsQuery = "Select * from [FoundReport$]";
+        private readonly string itemsQuery = "Select * from [FoundItems$]";
 
         private DataTable itemsTable;
         private OleDbConnection itemsConnection;
@@ -39,18 +39,11 @@ namespace LostAndFound.Services.Providers
 
                 var descriptionTags = GenerateDescriptionTagsFromString(dataArray[1].ToString());
                 var locationTags = GenerateLocationTagsFromString(dataArray[2].ToString());
+                 
+                var foundBy = dataArray[3].ToString();
+                var recordedBy = dataArray[4].ToString();
 
-                var name = dataArray[3].ToString().Split(' ');
-                var user = new User(name[0], dataArray[4].ToString())
-                {
-                    Email = dataArray[5].ToString(),
-                };
-                if(null != name[1])
-                {
-                    user.LastName = name[1];
-                }
-
-                var item = new FoundItem(date, descriptionTags, locationTags, name, dataArray[6].ToString());
+                var item = new FoundItem(date, descriptionTags, locationTags, foundBy, recordedBy);
 
                 items.Add(item);
             }
@@ -59,27 +52,23 @@ namespace LostAndFound.Services.Providers
         }
 
 
-        public FoundItem CreateFoundItem(DateTime date, string description, string location, string name, string phonenumber, string email, string recorder)
+        public FoundItem CreateFoundItem(DateTime date, string description, string location, string foundBy, string recordedBy)
         {
-            var insertCommandString = "INSERT INTO [FoundReport$] (Date, ItemDescription, LocationLost, LostBy, PhoneNumber, EmailAddress, RecordedBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            var insertCommandString = "INSERT INTO [FoundItems$] (Date, ItemDescription, LocationItemFound, FoundBy, RecordedBy) VALUES (?, ?, ?, ?, ?, ?)";
             this.itemsAdapert.InsertCommand = new OleDbCommand(insertCommandString, itemsConnection);
 
             itemsAdapert.InsertCommand.Parameters.Add("@Date", OleDbType.VarChar, 255).SourceColumn = "Date";
             itemsAdapert.InsertCommand.Parameters.Add("@ItemDescription", OleDbType.VarChar, 255).SourceColumn = "ItemDescription";
-            itemsAdapert.InsertCommand.Parameters.Add("@LocationLost", OleDbType.VarChar, 255).SourceColumn = "LocationLost";
-            itemsAdapert.InsertCommand.Parameters.Add("@LostBy", OleDbType.VarChar, 255).SourceColumn = "LostBy";
-            itemsAdapert.InsertCommand.Parameters.Add("@PhoneNumber", OleDbType.VarChar, 255).SourceColumn = "PhoneNumber";
-            itemsAdapert.InsertCommand.Parameters.Add("@EmailAddress", OleDbType.VarChar, 255).SourceColumn = "EmailAddress";
+            itemsAdapert.InsertCommand.Parameters.Add("@LocationItemFound", OleDbType.VarChar, 255).SourceColumn = "LocationItemFound";
+            itemsAdapert.InsertCommand.Parameters.Add("@FoundBy", OleDbType.VarChar, 255).SourceColumn = "FoundBy";
             itemsAdapert.InsertCommand.Parameters.Add("@RecordedBy", OleDbType.VarChar, 255).SourceColumn = "RecordedBy";
 
             DataRow newItemRow = itemsTable.NewRow();
             newItemRow["Date"] = date.ToString();
             newItemRow["ItemDescription"] = description.ToLower();
-            newItemRow["LocationLost"] = location.ToLower();
-            newItemRow["LostBy"] = name;
-            newItemRow["PhoneNumber"] = phonenumber;
-            newItemRow["EmailAddress"] = email;
-            newItemRow["RecordedBy"] = recorder;
+            newItemRow["LocationItemFound"] = location.ToLower();
+            newItemRow["FoundBy"] = foundBy;
+            newItemRow["RecordedBy"] = recordedBy;
 
             itemsTable.Rows.Add(newItemRow);
             itemsAdapert.Update(itemsTable);
@@ -87,17 +76,7 @@ namespace LostAndFound.Services.Providers
             var descriptionTags = GenerateDescriptionTagsFromString(description);
             var locationTags = GenerateLocationTagsFromString(location);
 
-            var splitname = name.Split(' ');
-            var user = new User(splitname[0], phonenumber)
-            {
-                Email = email
-            };
-            if (null == splitname[1])
-            {
-                user.LastName = splitname[1];
-            }
-
-            var newItem = new FoundItem(date, descriptionTags, locationTags, user, recorder);
+            var newItem = new FoundItem(date, descriptionTags, locationTags, foundBy, recordedBy);
 
             return newItem;
         }
@@ -105,9 +84,9 @@ namespace LostAndFound.Services.Providers
         public void UpdateLostItem(FoundItem oldFoundItem, FoundItem newFoundItem)
         {
             var updateCommandString = "UPDATE [LostReports$] SET Date = '" + newFoundItem.DateReported + "', ItemDescription = '" + newFoundItem.DescriptionTags + "', LocationLost = '" + newFoundItem.LocationTags +
-                                      "', RecordedBy = '" + newFoundItem.Recorder + "' " +
+                                      "', FoundBy = '" + newFoundItem.Reportee + "' " +  "', RecordedBy = '" + newFoundItem.Recorder + "' " +
                                       "WHERE Date = '" + oldFoundItem.DateReported + "', ItemDescription = '" + oldFoundItem.DescriptionTags + "', LocationLost = '" + oldFoundItem.LocationTags +
-                                      "', RecordedBy = '" + oldFoundItem.Recorder + "'";
+                                      "', FoundBy = '" + oldFoundItem.Reportee + "' " + "', RecordedBy = '" + oldFoundItem.Recorder + "'";
             OleDbCommand myCommand = new OleDbCommand();
             itemsConnection.Open();
             myCommand.Connection = itemsConnection;
