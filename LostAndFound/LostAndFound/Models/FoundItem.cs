@@ -2,5 +2,7 @@
 {
     public class FoundItem : Item
     {
+        public User Reportee { get; set; }
+
     }
 }

@@ -11,9 +11,7 @@ namespace LostAndFound.Models
 
         public List<LocationTag> LocationTags { get; set; }
 
-        public User Reportee { get; set; }
-
-        public User Owner { get; set; }
+        public List<StorageTag> StorageTags { get; set; } 
 
         public string Recorder { get; set; }
     }
