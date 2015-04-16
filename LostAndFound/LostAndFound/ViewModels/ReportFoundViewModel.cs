@@ -11,7 +11,7 @@ namespace LostAndFound.ViewModels
         
         public ReportFoundViewModel()
         {
-            var excelProvider = new ExcelProvider();
+            var excelProvider = new UserProvider();
             Users = excelProvider.GetUsers();
             Users.Add(excelProvider.CreateNewUser("JERSH", "MERXWERLS","123-111-9928"));
 

@@ -4,10 +4,9 @@ namespace LostAndFound.Models
 {
     public class User
     {
-        public User(string fname, string lname, string phone)
+        public User(string fname, string phone)
         {
             FirstName = fname;
-            LastName = lname;
             PhoneNumber = phone;
         }
 

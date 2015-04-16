@@ -1,23 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
-using System.Dynamic;
-using System.Windows.Documents;
 using LostAndFound.Models;
 
 namespace LostAndFound.Services
 {
-    class ExcelProvider
+    class UserProvider
     {
         private readonly string usersQuery = "Select * from [Users$]";
         
-        private DataTable dtExcel;
+        private DataTable usersTable;
         private OleDbConnection usersConnection;
         private OleDbDataAdapter usersAdapter;
 
-        public ExcelProvider(string file = @"C:\Users\Bryan\Documents\LostAndFound\LostAndFound\LostAndFound\Resources\LostAndFound.xlsx")
+        public UserProvider(string file = @"C:\Users\Bryan\Documents\LostAndFound\LostAndFound\LostAndFound\Resources\LostAndFound.xlsx")
         {
-            this.dtExcel = new DataTable();
+            this.usersTable = new DataTable();
             var filePath = file;
 
             //To get this to work you need to download and install the following: http://www.microsoft.com/en-us/download/details.aspx?id=13255
@@ -26,20 +24,21 @@ namespace LostAndFound.Services
             this.usersConnection = new OleDbConnection(SourceConstr);
 
             this.usersAdapter = new OleDbDataAdapter(usersQuery, usersConnection);
-            this.usersAdapter.Fill(dtExcel);
+            this.usersAdapter.Fill(usersTable);
         }
 
         public List<User> GetUsers()
         {
             var Users = new List<User>();
 
-            for (int i = 0; i < dtExcel.Rows.Count; i++)
+            for (int i = 0; i < usersTable.Rows.Count; i++)
             {
-                DataRow drow = dtExcel.Rows[i];
+                DataRow drow = usersTable.Rows[i];
                 var dataArray = drow.ItemArray;
 
-                var user = new User(dataArray[0].ToString(), dataArray[1].ToString(), dataArray[3].ToString())
+                var user = new User(dataArray[0].ToString(), dataArray[3].ToString())
                 {
+                    LastName = dataArray[1].ToString(),
                     Email = dataArray[2].ToString(),
                     TNumber = dataArray[4].ToString()
                 };
@@ -58,15 +57,18 @@ namespace LostAndFound.Services
             usersAdapter.InsertCommand.Parameters.Add("@LastName", OleDbType.VarChar, 255).SourceColumn = "LastName";
             usersAdapter.InsertCommand.Parameters.Add("@PhoneNumber", OleDbType.VarChar, 20).SourceColumn = "PhoneNumber";
 
-            DataRow newPersonRow = dtExcel.NewRow();
+            DataRow newPersonRow = usersTable.NewRow();
             newPersonRow["FirstName"] = firstName;
             newPersonRow["LastName"] = lastName;
             newPersonRow["PhoneNumber"] = phone;
 
-            dtExcel.Rows.Add(newPersonRow);
-            usersAdapter.Update(dtExcel);
+            usersTable.Rows.Add(newPersonRow);
+            usersAdapter.Update(usersTable);
 
-            User newUser = new User(firstName, lastName, phone);
+            User newUser = new User(firstName, phone)
+            {
+                LastName = lastName
+            };
 
             return newUser;
         }
@@ -76,7 +78,7 @@ namespace LostAndFound.Services
             var updateCommandString = "UPDATE [Users$] SET FirstName = '" + newUser.FirstName + "', LastName = '" + newUser.LastName + "', PhoneNumber = '" + newUser.PhoneNumber + "' " +
                                       "WHERE FirstName = '" + oldUser.FirstName + "' AND LastName = '" + oldUser.LastName + "' AND PhoneNumber = '" + oldUser.PhoneNumber + "'";
             //usersAdapter.UpdateCommand = new OleDbCommand(updateCommandString, usersConnection);
-            System.Data.OleDb.OleDbCommand myCommand = new System.Data.OleDb.OleDbCommand();
+            OleDbCommand myCommand = new OleDbCommand();
             //RANDAY - How do we know what row this User came from? Should we first run a query to find out the row number, orrr...? (Nora was here)
             usersConnection.Open();
             myCommand.Connection = usersConnection;
