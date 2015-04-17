@@ -81,9 +81,14 @@ namespace LostAndFound.Services.Providers
             return newItem;
         }
 
-        public void UpdateLostItem(FoundItem oldFoundItem, FoundItem newFoundItem)
+        public void DeleteFoundItem(FoundItem oldFoundItem)
         {
-            var updateCommandString = "UPDATE [LostReports$] SET Date = '" + newFoundItem.DateReported + "', ItemDescription = '" + newFoundItem.DescriptionTags + "', LocationLost = '" + newFoundItem.LocationTags +
+
+        }
+
+        public void UpdateFoundItem(FoundItem oldFoundItem, FoundItem newFoundItem)
+        {
+            var updateCommandString = "UPDATE [FoundItems$] SET Date = '" + newFoundItem.DateReported + "', ItemDescription = '" + newFoundItem.DescriptionTags + "', LocationLost = '" + newFoundItem.LocationTags +
                                       "', FoundBy = '" + newFoundItem.Reportee + "' " +  "', RecordedBy = '" + newFoundItem.Employee + "' " +
                                       "WHERE Date = '" + oldFoundItem.DateReported + "', ItemDescription = '" + oldFoundItem.DescriptionTags + "', LocationLost = '" + oldFoundItem.LocationTags +
                                       "', FoundBy = '" + oldFoundItem.Reportee + "' " + "', RecordedBy = '" + oldFoundItem.Employee + "'";

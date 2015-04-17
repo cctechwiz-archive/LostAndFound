@@ -85,6 +85,10 @@ namespace LostAndFound.Services.Providers
             return newItem;
         }
 
+        public void DeleteLostItem(LostItem oldLostItem)
+        {
+
+        }
         public void UpdateLostItem(LostItem oldLostItem, LostItem newLostItem)
         {
             var updateCommandString = "UPDATE [LostReports$] SET Date = '" + newLostItem.DateReported + "', ItemDescription = '" + newLostItem.DescriptionTags + "', LocationLost = '" + newLostItem.LocationTags +
