@@ -76,6 +76,7 @@
     <Compile Include="Services\Providers\DisposedItemProvider.cs" />
     <Compile Include="Services\Providers\LostItemProvider.cs" />
     <Compile Include="ViewModels\FileAsLostViewModel.cs" />
+    <Compile Include="ViewModels\GenericDialogViewModel.cs" />
     <Compile Include="ViewModels\ReportFoundViewModel.cs" />
     <Compile Include="Views\Controls\ExpiredItemActionUserControl.xaml.cs">
       <DependentUpon>ExpiredItemActionUserControl.xaml</DependentUpon>
@@ -91,6 +92,9 @@
     </Compile>
     <Compile Include="Views\Controls\LostItemDetailsUserControl.xaml.cs">
       <DependentUpon>LostItemDetailsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\GenericDialog.xaml.cs">
+      <DependentUpon>GenericDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\FileAsLostWindow.xaml.cs">
       <DependentUpon>FileAsLostWindow.xaml</DependentUpon>
@@ -140,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\LostItemDetailsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\GenericDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
