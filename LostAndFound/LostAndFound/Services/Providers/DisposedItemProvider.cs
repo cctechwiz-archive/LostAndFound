@@ -49,7 +49,10 @@ namespace LostAndFound.Services.Providers
 
                 var item = new DisposedItem(date, disposalDate, descriptionTags, locationTags, claimedBy, phone, email, disposedBy, disposalMethod);
 
-                items.Add(item);
+                if (date.Year != 1)
+                {
+                    items.Add(item);
+                }
             }
 
             return items;
@@ -58,55 +61,69 @@ namespace LostAndFound.Services.Providers
 
         public DisposedItem CreateDisposedItem(DateTime date, DateTime disposalDate, string description, string location, string claimedBy, string phone, string email, string disposedBy, string disposalMethod)
         {
-            var insertCommandString = "INSERT INTO [Disposed$] (DisposalDate, OriginalDate, ItemDescription, FoundLocation, ClaimedBy, PhoneNumber, Email, DisposedBy, DisposalMethod) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            this.itemsAdapert.InsertCommand = new OleDbCommand(insertCommandString, itemsConnection);
+            try
+            {
+                var insertCommandString = "INSERT INTO [Disposed$] (DisposalDate, OriginalDate, ItemDescription, FoundLocation, ClaimedBy, PhoneNumber, Email, DisposedBy, DisposalMethod) VALUES " +
+                "('" + disposalDate.ToString("MM/dd/yyyy") + "', '" + date.ToString("MM/dd/yyyy") + "', '" + description + "', '" + location + "', '" + claimedBy + "', '" + phone + "', '" + email + "', '" + disposedBy + "', '" + disposalMethod + "')";
 
-            itemsAdapert.InsertCommand.Parameters.Add("@DisposalDate", OleDbType.VarChar, 255).SourceColumn = "DisposalDate";
-            itemsAdapert.InsertCommand.Parameters.Add("@OriginalDate", OleDbType.VarChar, 255).SourceColumn = "OriginalDate";
-            itemsAdapert.InsertCommand.Parameters.Add("@ItemDescription", OleDbType.VarChar, 255).SourceColumn = "ItemDescription";
-            itemsAdapert.InsertCommand.Parameters.Add("@FoundLocation", OleDbType.VarChar, 255).SourceColumn = "FoundLocation";
-            itemsAdapert.InsertCommand.Parameters.Add("@ClaimedBy", OleDbType.VarChar, 255).SourceColumn = "ClaimedBy";
-            itemsAdapert.InsertCommand.Parameters.Add("@PhoneNumber", OleDbType.VarChar, 255).SourceColumn = "PhoneNumber";
-            itemsAdapert.InsertCommand.Parameters.Add("@Email", OleDbType.VarChar, 255).SourceColumn = "Email";
-            itemsAdapert.InsertCommand.Parameters.Add("@DisposedBy", OleDbType.VarChar, 255).SourceColumn = "DisposedBy";
-            itemsAdapert.InsertCommand.Parameters.Add("@DisposalMethod", OleDbType.VarChar, 255).SourceColumn = "DisposalMethod";
 
-            DataRow newItemRow = itemsTable.NewRow();
-            newItemRow["DisposalDate"] = disposalDate.ToString();
-            newItemRow["OriginalDate"] = date.ToString();
-            newItemRow["ItemDescription"] = description.ToLower();
-            newItemRow["FoundLocation"] = location.ToLower();
-            newItemRow["ClaimedBy"] = claimedBy;
-            newItemRow["PhoneNumber"] = phone;
-            newItemRow["Email"] = email;
-            newItemRow["DisposedBy"] = disposedBy;
-            newItemRow["DisposalMethod"] = disposalMethod;
+                itemsConnection.Open();
+                OleDbCommand myCommand = new OleDbCommand();
+                myCommand.Connection = itemsConnection;
+                myCommand.CommandText = insertCommandString;
+                myCommand.ExecuteNonQuery();
+                itemsConnection.Close();
 
-            itemsTable.Rows.Add(newItemRow);
-            itemsAdapert.Update(itemsTable);
-
-            var descriptionTags = GenerateDescriptionTagsFromString(description);
-            var locationTags = GenerateLocationTagsFromString(location);
-
-            var newItem = new DisposedItem(date, disposalDate, descriptionTags, locationTags, claimedBy, phone, email, disposedBy, disposalMethod);
-
-            return newItem;
-        }
-
-        public void DeleteDisposedItem(DisposedItem oldDisposedItem)
-        {
-
+                var descriptionTags = GenerateDescriptionTagsFromString(description);
+                var locationTags = GenerateLocationTagsFromString(location);
+                var disposedItem = new DisposedItem(date, disposalDate ,descriptionTags, locationTags, claimedBy, phone, email, disposedBy, disposalMethod);
+                return disposedItem;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
+            return null;
         }
 
         public void UpdateDisposedItem(DisposedItem oldDisposedItem, DisposedItem newDisposedItem)
         {
+            DescriptionTag[] oldDescs = oldDisposedItem.DescriptionTags.ToArray();
+            string oldDesc = "";
+            for (int i = 0; i < oldDescs.Length; i++)
+            {
+                oldDesc += oldDescs[i].Name;
+                if (i < oldDescs.Length - 1) oldDesc += " ";
+            }
+            DescriptionTag[] newDescs = newDisposedItem.DescriptionTags.ToArray();
+            string newDesc = "";
+            for (int i = 0; i < newDescs.Length; i++)
+            {
+                newDesc += newDescs[i].Name;
+                if (i < newDescs.Length - 1) newDesc += " ";
+            }
+
+            LocationTag[] oldLocs = oldDisposedItem.LocationTags.ToArray();
+            string oldLoc = "";
+            for (int i = 0; i < oldLocs.Length; i++)
+            {
+                oldLoc += oldLocs[i].Name;
+                if (i < oldLocs.Length - 1) oldLoc += " ";
+            }
+            LocationTag[] newLocs = newDisposedItem.LocationTags.ToArray();
+            string newLoc = "";
+            for (int i = 0; i < newLocs.Length; i++)
+            {
+                newLoc += newLocs[i].Name;
+                if (i < newLocs.Length - 1) newLoc += " ";
+            }
             //DisposalDate, OriginalDate, ItemDescription, FoundLocation, ClaimedBy, PhoneNumber, Email, DisposedBy, DisposalMethod
-            var updateCommandString = "UPDATE [Disposed$] SET DisposalDate = '" + newDisposedItem.Date + "', OriginalDate = '" + newDisposedItem.DateReported + "', ItemDescription = '" + newDisposedItem.DescriptionTags +
-                                      "', FoundLocation = '" + newDisposedItem.LocationTags + "', ClaimedBy = '" + newDisposedItem.claimedBy + "', PhoneNumber = '" + newDisposedItem.PhoneNumber +
+            var updateCommandString = "UPDATE [Disposed$] SET DisposalDate = '" + newDisposedItem.Date.ToString("MM/dd/yyyy") + "', OriginalDate = '" + newDisposedItem.DateReported.ToString("MM/dd/yyyy") + "', ItemDescription = '" + newDesc +
+                                      "', FoundLocation = '" + newLoc + "', ClaimedBy = '" + newDisposedItem.claimedBy + "', PhoneNumber = '" + newDisposedItem.PhoneNumber +
                                        "', Email = '" + newDisposedItem.Email + "', DisposedBy = '" + newDisposedItem.disposedBy + "', DisposalMethod = '" + newDisposedItem.disposalMethod + "' " +
-                                      "WHERE DisposalDate = '" + oldDisposedItem.Date + "', OriginalDate = '" + oldDisposedItem.DateReported + "', ItemDescription = '" + oldDisposedItem.DescriptionTags +
-                                      "', FoundLocation = '" + oldDisposedItem.LocationTags + "', ClaimedBy = '" + oldDisposedItem.claimedBy + "', PhoneNumber = '" + oldDisposedItem.PhoneNumber +
-                                       "', Email = '" + oldDisposedItem.Email + "', DisposedBy = '" + oldDisposedItem.disposedBy + "', DisposalMethod = '" + oldDisposedItem.disposalMethod + "'";
+                                      "WHERE DisposalDate = '" + oldDisposedItem.Date.ToString("MM/dd/yyyy") + "' AND OriginalDate = '" + oldDisposedItem.DateReported.ToString("MM/dd/yyyy") + "' AND ItemDescription = '" + oldDesc +
+                                      "' AND FoundLocation = '" + oldLoc + "' AND ClaimedBy = '" + oldDisposedItem.claimedBy + "' AND PhoneNumber = '" + oldDisposedItem.PhoneNumber +
+                                       "' AND Email = '" + oldDisposedItem.Email + "' AND DisposedBy = '" + oldDisposedItem.disposedBy + "' AND DisposalMethod = '" + oldDisposedItem.disposalMethod + "'";
             OleDbCommand myCommand = new OleDbCommand();
             itemsConnection.Open();
             myCommand.Connection = itemsConnection;

@@ -45,56 +45,81 @@ namespace LostAndFound.Services.Providers
 
                 var item = new LostItem(date, descriptionTags, locationTags, name, employee);
 
-                items.Add(item);
+                if (date.Year != 1)
+                {
+                    items.Add(item);
+                }
             }
 
             return items;
         }
 
 
-        public LostItem CreateLostItem(DateTime date, string description, string location, string name, string phonenumber, string email, string recorder)
+        public LostItem CreateLostItem(DateTime date, string description, string location, string foundBy, string phonenumber, string email, string recordedBy)
         {
-            var insertCommandString = "INSERT INTO [LostReports$] (Date, ItemDescription, LocationLost, LostBy, PhoneNumber, EmailAddress, RecordedBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            this.itemsAdapert.InsertCommand = new OleDbCommand(insertCommandString, itemsConnection);
+            try
+            {
+               var insertCommandString = "INSERT INTO [LostReports$] (DateLost, ItemDescription, LocationLost, LostBy, PhoneNumber, EmailAddress, RecordedBy) VALUES " +
+               "('" + date.ToString("MM/dd/yyyy") + "', '" + description + "', '" + location + "', '" + foundBy + "', '" + phonenumber + "', '" + email + "', '" + recordedBy + "')";
 
-            itemsAdapert.InsertCommand.Parameters.Add("@Date", OleDbType.VarChar, 255).SourceColumn = "Date";
-            itemsAdapert.InsertCommand.Parameters.Add("@ItemDescription", OleDbType.VarChar, 255).SourceColumn = "ItemDescription";
-            itemsAdapert.InsertCommand.Parameters.Add("@LocationLost", OleDbType.VarChar, 255).SourceColumn = "LocationLost";
-            itemsAdapert.InsertCommand.Parameters.Add("@LostBy", OleDbType.VarChar, 255).SourceColumn = "LostBy";
-            itemsAdapert.InsertCommand.Parameters.Add("@PhoneNumber", OleDbType.VarChar, 255).SourceColumn = "PhoneNumber";
-            itemsAdapert.InsertCommand.Parameters.Add("@EmailAddress", OleDbType.VarChar, 255).SourceColumn = "EmailAddress";
-            itemsAdapert.InsertCommand.Parameters.Add("@RecordedBy", OleDbType.VarChar, 255).SourceColumn = "RecordedBy";
 
-            DataRow newItemRow = itemsTable.NewRow();
-            newItemRow["Date"] = date.ToString();
-            newItemRow["ItemDescription"] = description.ToLower();
-            newItemRow["LocationLost"] = location.ToLower();
-            newItemRow["LostBy"] = name;
-            newItemRow["PhoneNumber"] = phonenumber;
-            newItemRow["EmailAddress"] = email;
-            newItemRow["RecordedBy"] = recorder;
+                itemsConnection.Open();
+                OleDbCommand myCommand = new OleDbCommand();
+                myCommand.Connection = itemsConnection;
+                myCommand.CommandText = insertCommandString;
+                myCommand.ExecuteNonQuery();
+                itemsConnection.Close();
 
-            itemsTable.Rows.Add(newItemRow);
-            itemsAdapert.Update(itemsTable);
-
-            var descriptionTags = GenerateDescriptionTagsFromString(description);
-            var locationTags = GenerateLocationTagsFromString(location);
-        
-            var newItem = new LostItem(date, descriptionTags, locationTags, name, recorder);
-
-            return newItem;
+                var descriptionTags = GenerateDescriptionTagsFromString(description);
+                var locationTags = GenerateLocationTagsFromString(location);
+                var lostItem = new LostItem(date, descriptionTags, locationTags, foundBy, recordedBy);
+                return lostItem;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
+            return null;
         }
 
-        public void DeleteLostItem(LostItem oldLostItem)
-        {
-
-        }
         public void UpdateLostItem(LostItem oldLostItem, LostItem newLostItem)
         {
-            var updateCommandString = "UPDATE [LostReports$] SET Date = '" + newLostItem.DateReported + "', ItemDescription = '" + newLostItem.DescriptionTags + "', LocationLost = '" + newLostItem.LocationTags +
-                                      "', LostBy = '" + newLostItem.Name + "', RecordedBy = '" + newLostItem.Employee + "' " +
-                                      "WHERE Date = '" + oldLostItem.DateReported + "', ItemDescription = '" + oldLostItem.DescriptionTags + "', LocationLost = '" + oldLostItem.LocationTags +
-                                      "', LostBy = '" + oldLostItem.Name + "', RecordedBy = '" + oldLostItem.Employee + "'";
+            DescriptionTag[] oldDescs = oldLostItem.DescriptionTags.ToArray();
+            string oldDesc = "";
+            for (int i = 0; i < oldDescs.Length; i++)
+            {
+                oldDesc += oldDescs[i].Name;
+                if (i < oldDescs.Length - 1) oldDesc += " ";
+            }
+            DescriptionTag[] newDescs = newLostItem.DescriptionTags.ToArray();
+            string newDesc = "";
+            for (int i = 0; i < newDescs.Length; i++)
+            {
+                newDesc += newDescs[i].Name;
+                if (i < newDescs.Length - 1) newDesc += " ";
+            }
+
+            LocationTag[] oldLocs = oldLostItem.LocationTags.ToArray();
+            string oldLoc = "";
+            for (int i = 0; i < oldLocs.Length; i++)
+            {
+                oldLoc += oldLocs[i].Name;
+                if (i < oldLocs.Length - 1) oldLoc += " ";
+            }
+            LocationTag[] newLocs = newLostItem.LocationTags.ToArray();
+            string newLoc = "";
+            for (int i = 0; i < newLocs.Length; i++)
+            {
+                newLoc += newLocs[i].Name;
+                if (i < newLocs.Length - 1) newLoc += " ";
+            }
+
+            var updateCommandString = "UPDATE [LostReports$] SET DateLost = '" + newLostItem.DateReported.ToString("MM/dd/yyyy")
+                + "', ItemDescription = '" + newDesc + "', LocationLost = '" + newLoc
+                + "', LostBy = '" + newLostItem.Name + "', RecordedBy = '" + newLostItem.Employee + "' " +
+                "WHERE DateLost = '" + oldLostItem.DateReported.ToString("MM/dd/yyyy")
+                + "' AND ItemDescription = '" + oldDesc + "' AND LocationLost = '" + oldLoc
+                + "' AND LostBy = '" + oldLostItem.Name + "' AND RecordedBy = '" + oldLostItem.Employee + "'";
             OleDbCommand myCommand = new OleDbCommand();
             itemsConnection.Open();
             myCommand.Connection = itemsConnection;
