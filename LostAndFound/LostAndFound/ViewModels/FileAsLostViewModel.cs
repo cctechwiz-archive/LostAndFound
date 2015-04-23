@@ -38,8 +38,9 @@ namespace LostAndFound.ViewModels
             } else if (String.IsNullOrWhiteSpace(Email) && String.IsNullOrWhiteSpace(PhoneNumber)) {
                 this.ShowWarning("Please enter an email address OR a phone number by which to contact the owner!");
             } else {
-                // Create lost item.
                 _lostItemProvider.CreateLostItem(DateTime.Now, Description, "", "", PhoneNumber, Email, "");
+                Window window = (Window)obj;
+                window.Close();
             }
         }
 

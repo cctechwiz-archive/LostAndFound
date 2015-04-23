@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="LostAndFound.Views.Windows.FileAsLostWindow" 
+﻿<Controls:MetroWindow x:Class="LostAndFound.Views.Windows.FileAsLostWindow" x:Name="LostWindow"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -27,7 +27,7 @@
             <TextBox Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding PhoneNumber}"></TextBox>
 
         </StackPanel>
-        <Button Padding="8,8,8,8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="3" Command="{Binding FileAsLostCommand}">
+        <Button Padding="8,8,8,8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="3" Command="{Binding FileAsLostCommand}" CommandParameter="{Binding ElementName=LostWindow}">
             <TextBlock Text="File Lost Item"/>
         </Button>
 
