@@ -20,9 +20,29 @@ namespace LostAndFound.Views.Dialogs
     /// </summary>
     public partial class GenericDialog : MetroWindow
     {
-        public GenericDialog()
+        private string _message;
+
+        public GenericDialog(string message)
         {
+            if (String.IsNullOrWhiteSpace(message))
+            {
+                throw new ArgumentException("Dialog message should not be null or empty.");
+            }
+            _message = message;
+
             InitializeComponent();
+        }
+
+        public string Message
+        {
+            get
+            {
+                return _message;
+            }
+            set
+            {
+                _message = value;
+            }
         }
     }
 }

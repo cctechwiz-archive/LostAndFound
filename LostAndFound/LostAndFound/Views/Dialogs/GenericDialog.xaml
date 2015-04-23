@@ -3,16 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:viewModels="clr-namespace:LostAndFound.ViewModels"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Height="300" Width="300">
-
-    <Window.DataContext>
-        <viewModels:GenericDialogViewModel></viewModels:GenericDialogViewModel>
-    </Window.DataContext>
+        Height="200" Width="450">
 
     <StackPanel>
-        <TextBlock Text="" />
-        <TextBox x:Name="ResponseTextBox" />
-        <Button Content="OK" />
+        <TextBlock Text="{Binding Message}" Margin="20,20,20,20"/>
+        <Button Content="OK" HorizontalAlignment="Center" VerticalAlignment="Bottom" Padding="50,10,50,10"/>
     </StackPanel>
     
 </Controls:MetroWindow>

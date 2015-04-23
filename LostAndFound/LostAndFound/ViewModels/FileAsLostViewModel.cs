@@ -1,10 +1,12 @@
 ﻿using LostAndFound.Services.Commands;
+using LostAndFound.Views.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace LostAndFound.ViewModels
@@ -23,12 +25,7 @@ namespace LostAndFound.ViewModels
 
         public FileAsLostViewModel()
         {
-            _fileAsLostCommand = new RelayCommand(obj => {
-                //if (_canExecute)
-                //{
-                //    // create new lost item
-                //}
-            });
+            _fileAsLostCommand = new RelayCommand(ShowWarningDialog);
         }
 
         private void RaisePropertyChanged(string propertyName)
@@ -38,6 +35,19 @@ namespace LostAndFound.ViewModels
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        private void ShowWarningDialog(object obj)
+        {
+            GenericDialog dialog = new GenericDialog("Hi dudes");
+            dialog.Owner = Application.Current.MainWindow;
+            dialog.ShowDialog();
+        }
+
+        public ICommand FileAsLostCommand
+        {
+            get { return _fileAsLostCommand; }
+            set { _fileAsLostCommand = value; }
         }
 
         public string Name
