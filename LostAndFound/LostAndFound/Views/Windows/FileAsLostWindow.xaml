@@ -1,7 +1,14 @@
-﻿<Window x:Class="LostAndFound.Views.FileAsLost" 
+﻿<Controls:MetroWindow x:Class="LostAndFound.Views.Windows.FileAsLostWindow" 
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             Height="360" Width="200" Title="File As Lost">
+        xmlns:viewModels="clr-namespace:LostAndFound.ViewModels"
+        Height="400" Width="270" Title="File As Lost">
+
+    <Window.DataContext>
+        <viewModels:FileAsLostViewModel></viewModels:FileAsLostViewModel>
+    </Window.DataContext>
+    
     <Grid>
         <StackPanel Orientation="Vertical" Grid.Row="1">
             <TextBlock Text="Person's Name" Margin="25,10,0,0"/>
@@ -20,10 +27,10 @@
             <TextBox Width="150" Margin="0,2,0,0" HorizontalAlignment="Center"></TextBox>
 
         </StackPanel>
-        <Button Padding="8,8,8,8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="3">
+        <Button Padding="8,8,8,8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="3" Command="{Binding FileLostItemCommand}">
             <TextBlock Text="File Lost Item"/>
         </Button>
 
     </Grid>
     
-</Window>
+</Controls:MetroWindow>

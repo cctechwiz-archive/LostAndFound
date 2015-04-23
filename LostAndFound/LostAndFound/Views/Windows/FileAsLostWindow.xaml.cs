@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,19 +14,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LostAndFound.Views
+namespace LostAndFound.Views.Windows
 {
-    public partial class SearchForLostItemView : UserControl
+    /// <summary>
+    /// Interaction logic for FileAsLost.xaml
+    /// </summary>
+    public partial class FileAsLostWindow : MetroWindow
     {
-        public SearchForLostItemView()
+        public FileAsLostWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            FileAsLost fileAsLostWindow = new FileAsLost();
-            fileAsLostWindow.Show();
         }
     }
 }

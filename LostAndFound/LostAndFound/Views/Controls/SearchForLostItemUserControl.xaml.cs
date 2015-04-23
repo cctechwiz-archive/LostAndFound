@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LostAndFound.Views.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +16,17 @@ using System.Windows.Shapes;
 
 namespace LostAndFound.Views
 {
-    /// <summary>
-    /// Interaction logic for FileAsLost.xaml
-    /// </summary>
-    public partial class FileAsLost : Window
+    public partial class SearchForLostItemView : UserControl
     {
-        public FileAsLost()
+        public SearchForLostItemView()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            FileAsLostWindow fileAsLostWindow = new FileAsLostWindow();
+            fileAsLostWindow.Show();
         }
     }
 }

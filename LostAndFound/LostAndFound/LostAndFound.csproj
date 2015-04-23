@@ -74,6 +74,7 @@
     <Compile Include="Services\Providers\FoundItemProvider.cs" />
     <Compile Include="Services\Providers\DisposedItemProvider.cs" />
     <Compile Include="Services\Providers\LostItemProvider.cs" />
+    <Compile Include="ViewModels\FileAsLostViewModel.cs" />
     <Compile Include="ViewModels\ReportFoundViewModel.cs" />
     <Compile Include="Views\Controls\ExpiredItemActionUserControl.xaml.cs">
       <DependentUpon>ExpiredItemActionUserControl.xaml</DependentUpon>
@@ -84,23 +85,23 @@
     <Compile Include="Views\Controls\LostItemReportUserControl.xaml.cs">
       <DependentUpon>LostItemReportUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ExpiredItemsView.xaml.cs">
-      <DependentUpon>ExpiredItemsView.xaml</DependentUpon>
+    <Compile Include="Views\Controls\ExpiredItemsUserControl.xaml.cs">
+      <DependentUpon>ExpiredItemsUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\LostItemDetailsUserControl.xaml.cs">
       <DependentUpon>LostItemDetailsUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FileAsLost.xaml.cs">
-      <DependentUpon>FileAsLost.xaml</DependentUpon>
+    <Compile Include="Views\Windows\FileAsLostWindow.xaml.cs">
+      <DependentUpon>FileAsLostWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Windows\ReportFoundView.xaml.cs">
-      <DependentUpon>ReportFoundView.xaml</DependentUpon>
+    <Compile Include="Views\Controls\ReportFoundUserControl.xaml.cs">
+      <DependentUpon>ReportFoundUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SearchForLostItemView.xaml.cs">
-      <DependentUpon>SearchForLostItemView.xaml</DependentUpon>
+    <Compile Include="Views\Controls\SearchForLostItemUserControl.xaml.cs">
+      <DependentUpon>SearchForLostItemUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ReportsTab.xaml.cs">
-      <DependentUpon>ReportsTab.xaml</DependentUpon>
+    <Compile Include="Views\Controls\ReportsTabUserControl.xaml.cs">
+      <DependentUpon>ReportsTabUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\ClaimItemWindow.xaml.cs">
       <DependentUpon>ClaimItemWindow.xaml</DependentUpon>
@@ -133,7 +134,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ExpiredItemsView.xaml">
+    <Page Include="Views\Controls\ExpiredItemsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,19 +142,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FileAsLost.xaml">
+    <Page Include="Views\Windows\FileAsLostWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Windows\ReportFoundView.xaml">
+    <Page Include="Views\Controls\ReportFoundUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SearchForLostItemView.xaml">
+    <Page Include="Views\Controls\SearchForLostItemUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ReportsTab.xaml">
+    <Page Include="Views\Controls\ReportsTabUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
