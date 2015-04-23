@@ -27,7 +27,7 @@
             <TextBox Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding PhoneNumber}"></TextBox>
 
         </StackPanel>
-        <Button Padding="8,8,8,8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="3" Command="{Binding FileLostItemCommand}">
+        <Button Padding="8,8,8,8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="3" Command="{Binding FileAsLostCommand}">
             <TextBlock Text="File Lost Item"/>
         </Button>
 

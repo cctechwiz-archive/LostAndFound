@@ -26,6 +26,7 @@ namespace LostAndFound.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             FileAsLostWindow fileAsLostWindow = new FileAsLostWindow();
+            fileAsLostWindow.Owner = Application.Current.MainWindow;
             fileAsLostWindow.Show();
         }
     }
