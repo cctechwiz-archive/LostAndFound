@@ -6,8 +6,8 @@
         Height="200" Width="450">
 
     <StackPanel>
-        <TextBlock Text="{Binding Message}" Margin="20,20,20,20"/>
-        <Button Content="OK" HorizontalAlignment="Center" VerticalAlignment="Bottom" Padding="50,10,50,10"/>
+        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Message}" Margin="20,20,20,50"/>
+        <Button Content="OK" HorizontalAlignment="Center" VerticalAlignment="Bottom" Padding="50,10,50,10" Click="Button_Click"/>
     </StackPanel>
     
 </Controls:MetroWindow>

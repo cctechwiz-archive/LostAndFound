@@ -29,7 +29,6 @@ namespace LostAndFound.Views.Dialogs
                 throw new ArgumentException("Dialog message should not be null or empty.");
             }
             _message = message;
-
             InitializeComponent();
         }
 
@@ -43,6 +42,11 @@ namespace LostAndFound.Views.Dialogs
             {
                 _message = value;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
