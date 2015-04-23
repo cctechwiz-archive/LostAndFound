@@ -12,19 +12,19 @@
     <Grid>
         <StackPanel Orientation="Vertical" Grid.Row="1">
             <TextBlock Text="Person's Name" Margin="25,10,0,0"/>
-            <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center"/>
+            <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding Name}"/>
             
             <TextBlock Text="Add Description" Margin="25,10,0,0"></TextBlock>
-            <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center"/>
+            <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding Description}"/>
 
             <TextBlock Text="Date Lost" Margin="25,10,0,0"></TextBlock>
-            <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center"/>
+            <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding DateLost}"/>
 
             <TextBlock Text="Email" Margin="25,10,0,0"></TextBlock>
-            <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center"/>
+            <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding Email}"/>
             
             <TextBlock Text="Phone Number" Margin="25,10,0,0"></TextBlock>
-            <TextBox Width="150" Margin="0,2,0,0" HorizontalAlignment="Center"></TextBox>
+            <TextBox Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding PhoneNumber}"></TextBox>
 
         </StackPanel>
         <Button Padding="8,8,8,8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="3" Command="{Binding FileLostItemCommand}">
