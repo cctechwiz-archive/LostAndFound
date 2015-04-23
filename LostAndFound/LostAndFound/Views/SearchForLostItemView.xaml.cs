@@ -15,15 +15,17 @@ using System.Windows.Shapes;
 
 namespace LostAndFound.Views
 {
-    /// <summary>
-    /// Interaction logic for SearchForLostItemView.xaml
-    /// lol
-    /// </summary>
     public partial class SearchForLostItemView : UserControl
     {
         public SearchForLostItemView()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            FileAsLost fileAsLostWindow = new FileAsLost();
+            fileAsLostWindow.Show();
         }
     }
 }
