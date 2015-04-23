@@ -14,13 +14,13 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <MediaElement Name="fileBrowser" Height="400" />
-            <Button>
+            <Button Click="clickHelp">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20"
                    Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                         <Rectangle.OpacityMask>
                             <VisualBrush Stretch="Uniform"  
-                         Visual="{StaticResource appbar_question}" />
+                         Visual="{StaticResource appbar_question}"/>
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </StackPanel>
