@@ -71,6 +71,7 @@
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\LocationTag.cs" />
     <Compile Include="Models\Tag.cs" />
+    <Compile Include="Services\Commands\RelayCommand.cs" />
     <Compile Include="Services\Providers\FoundItemProvider.cs" />
     <Compile Include="Services\Providers\DisposedItemProvider.cs" />
     <Compile Include="Services\Providers\LostItemProvider.cs" />
