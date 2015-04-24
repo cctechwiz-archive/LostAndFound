@@ -11,13 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 
 namespace LostAndFound.Views.Windows
 {
     /// <summary>
     /// Interaction logic for ClaimItemWindow.xaml
     /// </summary>
-    public partial class ClaimItemWindow : Window
+    public partial class ClaimItemWindow : MetroWindow
     {
         public ClaimItemWindow()
         {

@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LostAndFound.Models;
+using LostAndFound.Services;
 
 namespace LostAndFound.ViewModels
 {
 
     class ReportFoundViewModel
     {
-        private String _text = "lol hi dudes";
-
-        public String Text
+        
+        public ReportFoundViewModel()
         {
-            get { return _text; }
-            set { _text = value; }
         }
+
+        public List<Item> Items { get; set; }
+
+        public String Text { get; set; }
+
     }
 }

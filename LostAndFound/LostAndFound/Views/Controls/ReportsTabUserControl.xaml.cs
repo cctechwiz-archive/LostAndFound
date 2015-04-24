@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace LostAndFound.Views
 {
     /// <summary>
-    /// Interaction logic for ReportFoundView.xaml
+    /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class ReportFoundView : UserControl
+    public partial class UserControl1 : UserControl
     {
-        public ReportFoundView()
+        public UserControl1()
         {
             InitializeComponent();
         }

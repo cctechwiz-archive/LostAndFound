@@ -7,6 +7,20 @@
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       d:DesignHeight="200" d:DesignWidth="200">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -16,19 +30,23 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <TextBlock Text="Item 2" Grid.Row="0"/>
+        <TextBlock Text="Selected Item Description" Grid.Row="0" Margin="4" HorizontalAlignment="center"></TextBlock>
+        <TextBlock Text="Item 2" Grid.Row="1" Margin="4"/>
         <TextBlock Text="{Binding Source={x:Static sys:DateTime.Today},  
-           StringFormat='{}{0:MM/ddyy}'}" HorizontalAlignment="Right" Grid.Row="0"/>
+           StringFormat='{}{0:MM/dd/yy}'}" HorizontalAlignment="Right" Grid.Row="1" Margin="4"/>
 
-        <TextBlock Text="Tag 1" Grid.Row="1"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="2">
+        <TextBlock Text="Tag 1" Grid.Row="2" Margin="4"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="5">
             <TextBlock Text="Found at: " />
-            <TextBox Width="50" HorizontalAlignment="Left"/>
+            <TextBox Width="100" HorizontalAlignment="Left"/>
         </StackPanel>
-        <Button Padding="8,8,8,8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="3">
+
+        <Button Padding="8,8,8,8" VerticalAlignment="Bottom" Grid.Row="4" Margin="79,0,79,63">
+
+
             <TextBlock Text="Claim"/>
         </Button>
 
