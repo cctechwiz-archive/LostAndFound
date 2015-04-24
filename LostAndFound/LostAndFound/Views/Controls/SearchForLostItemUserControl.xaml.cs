@@ -21,16 +21,20 @@ namespace LostAndFound.Views
 {
     public partial class SearchForLostItemView : UserControl
     {
-        private ObservableCollection<LostItem> _lostItems;
+        private LostItemProvider _lostItemProvider;
+        private List<LostItem> _cachedLostItems;
+        private List<LostItem> _lostItems;
 
         public SearchForLostItemView()
         {
-            LostItemProvider provider = new LostItemProvider();
-            _lostItems = new ObservableCollection<LostItem>(provider.GetLostItems());
+            _lostItemProvider = new LostItemProvider();
+            _cachedLostItems = _lostItemProvider.GetLostItems();
+            _lostItems = new List<LostItem>(_lostItemProvider.GetLostItems());
             InitializeComponent();
             LostItemListView.ItemsSource = _lostItems;
 
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -39,9 +43,31 @@ namespace LostAndFound.Views
             fileAsLostWindow.Show();
         }
 
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Search
+            TextBox textBox = (TextBox)sender;
+            if (null != textBox) {
+                if (String.IsNullOrEmpty(textBox.Text))
+                {
+                    _lostItems = _cachedLostItems;
+                }
+                else
+                {
+                    IEnumerable<LostItem> query = _cachedLostItems.Where(i => i.Name.Contains(textBox.Text));
+                    List<LostItem> asList = query.ToList();
+                    if (asList.Count == 0)
+                    {
+                        query = _lostItemProvider.GetLostItems().Where(i => i.Name.Contains(textBox.Text));
+                        asList = query.ToList();
+                    }
+                    _lostItems = new List<LostItem>(asList);
+                }
+            }
+            if (null != LostItemListView)
+            {
+                LostItemListView.ItemsSource = _lostItems;
+            }
         }
     }
 }
