@@ -26,7 +26,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Margin="25 25 25 25" Grid.Column="0">
-            <ComboBox Text="View expired items from..."  Width="200" HorizontalAlignment="Left" IsEditable="True" IsReadOnly="True">
+            <ComboBox Text="View expired items from..."  Width="200" HorizontalAlignment="Left" IsEditable="True" IsReadOnly="True" SelectionChanged="selectionChanged">
                 <ComboBoxItem Name="cbi1" >7 days ago</ComboBoxItem>
                 <ComboBoxItem Name="cbi2">30 days ago</ComboBoxItem>
                 <ComboBoxItem Name="cbi3">60 days ago</ComboBoxItem>
@@ -35,9 +35,14 @@
             </ComboBox>
             
             <!-- TODO: Below the combobox (whatever), we should add the expired tags UserControl. -->
-            <local:ExpiredTagListUserControl Margin="0,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-
-            </local:ExpiredTagListUserControl>
+            <ListView x:Name="ExpiredItemListView" Height="350" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding FoundItemList}" SelectionChanged="itemClicked">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding desc}" Header="Description" Width="260"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding date}" Header="Date Found" Width="120"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
             
         </StackPanel>
         
