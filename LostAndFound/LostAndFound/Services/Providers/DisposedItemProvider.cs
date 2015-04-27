@@ -14,7 +14,7 @@ namespace LostAndFound.Services.Providers
         private OleDbConnection itemsConnection;
         private OleDbDataAdapter itemsAdapert;
 
-        public DisposedItemProvider(string file = @"..\..\Resources\LostAndFoundDatabase.xlsx")
+        public DisposedItemProvider(string file = @"..\..\Resources\Disposal.xlsx")
         {
             this.itemsTable = new DataTable();
             var filePath = file;

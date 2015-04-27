@@ -16,7 +16,7 @@
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="25,25,25,25">
             <TextBox TextChanged="TextBox_TextChanged" />
             <CheckBox Margin="0,2,0,7">Show disposed</CheckBox>
-            <ListView x:Name="LostItemListView" Height="400" ItemsSource="{Binding LostItemList}" SelectionChanged="itemClicked">
+            <ListView x:Name="LostItemListView" Height="350" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding LostItemList}" SelectionChanged="itemClicked">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="IsSelected" Value="{Binding isSelected}"/>
@@ -25,8 +25,8 @@
                 <ListView.View>
                     <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Items Reported as Lost">
                         <GridViewColumn DisplayMemberBinding="{Binding desc}" Header="Description" Width="150"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding loc}" Header="Location Found" Width="150"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding date}" Header="Date Reported" Width="120"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding loc}" Header="Location Lost" Width="120"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding date}" Header="Date Reported" Width="110"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -35,9 +35,6 @@
             
             <local:LostItemDetailsUserControl />
 
-            <Button Padding="25,10,25,10" Click="Button_Click" MaxWidth="100" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                <TextBlock Text="File as Lost"/>
-            </Button>
             
         </StackPanel>
     </Grid>

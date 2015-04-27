@@ -23,7 +23,6 @@ namespace LostAndFound.Views
 {
     public partial class SearchForLostItemView : UserControl
     {
-        private static LostItemProvider _lostItemProvider;
         private static List<LostItem> _cachedLostItems;
         public static List<LostItem> _lostItems;
         public static bool reloadList;
@@ -31,7 +30,7 @@ namespace LostAndFound.Views
         public SearchForLostItemView()
         {
             reloadList = false;
-            _lostItemProvider = new LostItemProvider();
+            LostItemProvider _lostItemProvider = new LostItemProvider();
             _cachedLostItems = _lostItemProvider.GetLostItems();
             _lostItems = new List<LostItem>(_lostItemProvider.GetLostItems());
             InitializeComponent();
@@ -74,13 +73,6 @@ namespace LostAndFound.Views
                     LostItemDetailsUserControl.lostItems = _lostItems;
                 }
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            FileAsLostWindow fileAsLostWindow = new FileAsLostWindow();
-            fileAsLostWindow.Owner = Application.Current.MainWindow;
-            fileAsLostWindow.Show();
         }
 
         private void reloadListView()

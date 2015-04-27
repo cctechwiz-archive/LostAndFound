@@ -79,6 +79,7 @@ namespace LostAndFound.Views.Controls
                     var dateTime = new DateTime(1, 1, 1);
                     LostItem li = new LostItem(dateTime, item.DescriptionTags, item.LocationTags, item.Name, item.Employee);
                     lostItemProvider.UpdateLostItem(item, li);
+                    dateTime = DateTime.Now;
                     SearchForLostItemView.reloadList = true;
                 }
             }

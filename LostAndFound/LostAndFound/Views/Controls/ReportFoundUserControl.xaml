@@ -33,28 +33,28 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0">
             <TextBlock Text="Item Description" Padding="5,0,0,0"/>
-            <TextBox Width="140" />
+            <TextBox TextChanged="TextBox_TextChanged" Width="140" />
 
-            <TextBlock Text="Found Location" Padding="5,15,0,0"/>
-            <TextBox Width="140"/>
+            <Button Margin="20" Padding="21,10,21,10" Click="Button_Click2" MaxWidth="150" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <TextBlock Text="Claim"/>
+            </Button>
 
 
-            <TextBlock Text="Storage Location" Padding="5,15,0,0"/>
-            <TextBox Width="140"/>
+            <Button Margin="10" Padding="10,10,10,10" Click="Button_Click" MaxWidth="150" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <TextBlock Text="File as Lost"/>
+            </Button>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1">
             <!-- TODO: Add tag stuff here. -->
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="2">
             <TextBlock Text="Possible matches..." />
-            <ListView x:Name="UsersList" ItemsSource="{Binding Users}">
+            <ListView x:Name="FoundItemListView" Height="350" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding FoundItemList}" SelectionChanged="itemClicked">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="FirstName" DisplayMemberBinding="{Binding FirstName}"/>
-                        <GridViewColumn Header="LastName" DisplayMemberBinding="{Binding LastName}"/>
-                        <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
-                        <GridViewColumn Header="PhoneNumber" DisplayMemberBinding="{Binding PhoneNumber}"/>
-                        <GridViewColumn Header="TNumber" DisplayMemberBinding="{Binding TNumber}"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding desc}" Header="Description" Width="270"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding loc}" Header="Location Found" Width="230"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding date}" Header="Date Found" Width="120"/>
                     </GridView>
                 </ListView.View>
             </ListView>
