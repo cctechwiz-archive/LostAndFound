@@ -1,6 +1,7 @@
 ﻿using LostAndFound.Models;
 using LostAndFound.Services.Providers;
 using LostAndFound.Views.Windows;
+using LostAndFound.Views.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,25 +17,64 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace LostAndFound.Views
 {
     public partial class SearchForLostItemView : UserControl
     {
-        private LostItemProvider _lostItemProvider;
-        private List<LostItem> _cachedLostItems;
-        private List<LostItem> _lostItems;
+        private static LostItemProvider _lostItemProvider;
+        private static List<LostItem> _cachedLostItems;
+        public static List<LostItem> _lostItems;
+        public static bool reloadList;
 
         public SearchForLostItemView()
         {
+            reloadList = false;
             _lostItemProvider = new LostItemProvider();
             _cachedLostItems = _lostItemProvider.GetLostItems();
             _lostItems = new List<LostItem>(_lostItemProvider.GetLostItems());
             InitializeComponent();
-            LostItemListView.ItemsSource = _lostItems;
-
+            foreach (var item in _lostItems)
+            {
+                LostItemListView.Items.Add(createMyItem(item));
+            }
         }
 
+        private MyItem createMyItem(LostItem item)
+        {
+            String tmp1 = "";
+            foreach (var desc in item.DescriptionTags)
+            {
+                tmp1 += desc.Name + " ";
+            }
+            String tmp2 = "";
+            foreach (var desc in item.LocationTags)
+            {
+                tmp2 += desc.Name + " ";
+            }
+            MyItem t;
+            t = new MyItem { desc = tmp1, loc = tmp2, date = item.DateReported.ToString("MM/dd/yyyy"), isVisible = true, isSelected = false };
+            return t;
+        }
+
+        private void itemClicked(object sender, SelectionChangedEventArgs e)
+        {
+            if (reloadList)
+            {
+                reloadListView();
+            }
+            else
+            {
+                if (e.AddedItems.Count > 0)
+                {
+                    var item = (MyItem)e.AddedItems[0];
+                    LostItemDetailsUserControl.ItemName.Text = item.desc;
+                    LostItemDetailsUserControl.itemBasic = item;
+                    LostItemDetailsUserControl.lostItems = _lostItems;
+                }
+            }
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -43,30 +83,45 @@ namespace LostAndFound.Views
             fileAsLostWindow.Show();
         }
 
+        private void reloadListView()
+        {
+            reloadList = false;
+            var lostItemProvider = new LostItemProvider();
+            _lostItems = null;
+            _lostItems = lostItemProvider.GetLostItems();
+            LostItemListView.Items.Clear();
+            foreach (var item in _lostItems)
+            {
+                LostItemListView.Items.Add(createMyItem(item));
+            }
+        }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (null != textBox) {
-                if (String.IsNullOrEmpty(textBox.Text))
-                {
-                    _lostItems = _cachedLostItems;
-                }
-                else
-                {
-                    IEnumerable<LostItem> query = _cachedLostItems.Where(i => i.Name.Contains(textBox.Text));
-                    List<LostItem> asList = query.ToList();
-                    if (asList.Count == 0)
-                    {
-                        query = _lostItemProvider.GetLostItems().Where(i => i.Name.Contains(textBox.Text));
-                        asList = query.ToList();
-                    }
-                    _lostItems = new List<LostItem>(asList);
-                }
-            }
-            if (null != LostItemListView)
+            if (reloadList)
             {
-                LostItemListView.ItemsSource = _lostItems;
+                reloadListView();
+            }
+            else
+            {
+                TextBox textBox = (TextBox)sender;
+                if (null != textBox)
+                {
+                    foreach (var item in LostItemListView.Items)
+                    {
+                        MyItem i = (MyItem)item;
+                        i.isSelected = false;
+                    }
+                    LostItemListView.Items.Clear();
+                    foreach (var item in _lostItems)
+                    {
+                        MyItem mItem = createMyItem(item);
+                        if (mItem.desc.Contains(textBox.Text))
+                        {
+                            LostItemListView.Items.Add(mItem);
+                        }
+                    }
+                }
             }
         }
     }

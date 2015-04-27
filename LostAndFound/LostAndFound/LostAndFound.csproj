@@ -65,6 +65,7 @@
     <Compile Include="Models\DescriptionTag.cs" />
     <Compile Include="Models\DisposedItem.cs" />
     <Compile Include="Models\DisposedTag.cs" />
+    <Compile Include="Models\MyItem.cs" />
     <Compile Include="Models\StorageTag.cs" />
     <Compile Include="Models\LostItem.cs" />
     <Compile Include="Models\FoundItem.cs" />
