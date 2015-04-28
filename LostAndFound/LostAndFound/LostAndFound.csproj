@@ -96,6 +96,9 @@
     <Compile Include="Views\Dialogs\GenericDialog.xaml.cs">
       <DependentUpon>GenericDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Windows\FileAsFoundWindow.xaml.cs">
+      <DependentUpon>FileAsFoundWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\FileAsLostWindow.xaml.cs">
       <DependentUpon>FileAsLostWindow.xaml</DependentUpon>
     </Compile>
@@ -150,6 +153,10 @@
     <Page Include="Views\Dialogs\GenericDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\FileAsFoundWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Windows\FileAsLostWindow.xaml">
       <SubType>Designer</SubType>

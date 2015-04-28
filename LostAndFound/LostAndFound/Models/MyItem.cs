@@ -11,6 +11,7 @@ namespace LostAndFound.Models
         public string desc { get; set; }
         public string loc { get; set; }
         public string date { get; set; }
+        public string name { get; set; }
         public bool isVisible { get; set; }
         public bool isSelected { get; set; }
     }

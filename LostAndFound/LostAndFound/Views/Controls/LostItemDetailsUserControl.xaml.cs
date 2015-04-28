@@ -1,6 +1,8 @@
 ﻿using System;
 using LostAndFound.Models;
 using LostAndFound.Services.Providers;
+using LostAndFound.Views.Windows;
+using LostAndFound.Views.Controls;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,6 +57,13 @@ namespace LostAndFound.Views.Controls
             public static String iText;
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            FileAsFoundWindow fileAsFoundWindow = new FileAsFoundWindow();
+            fileAsFoundWindow.Owner = Application.Current.MainWindow;
+            fileAsFoundWindow.Show();
+            ReportFoundView.reloadList = true;
+        }
         private void claimClick(object sender, RoutedEventArgs e)
         {
             foreach (var item in lostItems)

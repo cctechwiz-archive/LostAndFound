@@ -10,7 +10,7 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="450" />
+            <ColumnDefinition Width="550" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="25,25,25,25">
@@ -24,8 +24,8 @@
                 </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Items Reported as Lost">
-                        <GridViewColumn DisplayMemberBinding="{Binding desc}" Header="Description" Width="150"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding loc}" Header="Location Lost" Width="120"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding name}" Header="Name" Width="110"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding desc}" Header="Description" Width="260"/>                    
                         <GridViewColumn DisplayMemberBinding="{Binding date}" Header="Date Reported" Width="110"/>
                     </GridView>
                 </ListView.View>
@@ -33,7 +33,7 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="25,25,25,25">
             
-            <local:LostItemDetailsUserControl />
+            <local:LostItemDetailsUserControl HorizontalAlignment="Right"/>
 
             
         </StackPanel>

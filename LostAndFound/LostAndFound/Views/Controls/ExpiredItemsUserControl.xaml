@@ -38,7 +38,7 @@
             <ListView x:Name="ExpiredItemListView" Height="350" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding FoundItemList}" SelectionChanged="itemClicked">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding desc}" Header="Description" Width="260"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding desc}" Header="Description" Width="210"/>
                         <GridViewColumn DisplayMemberBinding="{Binding date}" Header="Date Found" Width="120"/>
                     </GridView>
                 </ListView.View>

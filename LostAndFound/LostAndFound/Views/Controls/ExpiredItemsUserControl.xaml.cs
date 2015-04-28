@@ -47,14 +47,14 @@ namespace LostAndFound.Views
             if (text1.Equals("30 days ago")) farBack = 30;
             if (text1.Equals("60 days ago")) farBack = 60;
             if (text1.Equals("90 days ago")) farBack = 90;
-            if (text1.Equals("The beginning of time")) farBack = 100000;
+            if (text1.Equals("The beginning of time")) farBack = 0;
             ExpiredItemListView.Items.Clear();
             DateTime dateTime = DateTime.Now;
             foreach (var item in _foundItems)
             {
                 TimeSpan ts = dateTime - item.DateReported;
                 int td = ts.Days; 
-                if (td <= farBack)
+                if (td >= farBack)
                 {
                     ExpiredItemListView.Items.Add(createMyItem(item));
                 }

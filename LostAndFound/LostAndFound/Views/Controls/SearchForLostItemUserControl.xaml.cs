@@ -53,7 +53,7 @@ namespace LostAndFound.Views
                 tmp2 += desc.Name + " ";
             }
             MyItem t;
-            t = new MyItem { desc = tmp1, loc = tmp2, date = item.DateReported.ToString("MM/dd/yyyy"), isVisible = true, isSelected = false };
+            t = new MyItem { desc = tmp1, loc = tmp2, date = item.DateReported.ToString("MM/dd/yyyy"), name = item.Name,isVisible = true, isSelected = false };
             return t;
         }
 
@@ -68,7 +68,7 @@ namespace LostAndFound.Views
                 if (e.AddedItems.Count > 0)
                 {
                     var item = (MyItem)e.AddedItems[0];
-                    LostItemDetailsUserControl.ItemName.Text = item.desc;
+                    LostItemDetailsUserControl.ItemName.Text = item.name;
                     LostItemDetailsUserControl.itemBasic = item;
                     LostItemDetailsUserControl.lostItems = _lostItems;
                 }
@@ -108,7 +108,7 @@ namespace LostAndFound.Views
                     foreach (var item in _lostItems)
                     {
                         MyItem mItem = createMyItem(item);
-                        if (mItem.desc.Contains(textBox.Text))
+                        if (mItem.name.ToLower().Contains(textBox.Text.ToLower()))
                         {
                             LostItemListView.Items.Add(mItem);
                         }
