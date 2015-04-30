@@ -16,24 +16,23 @@ using LostAndFound.Views;
 
 namespace LostAndFound.ViewModels
 {
-    class FileAsLostViewModel
+    class FileAsFoundViewModel
     {
-        private ICommand _fileAsLostCommand;
-        private LostItemProvider _lostItemProvider;
+        private ICommand _fileAsFoundCommand;
+        private FoundItemProvider _foundItemProvider;
 
         private string _name = "";
         private string _description = "";
-        private string _email = "";
-        private string _phoneNumber = "";
-        private string _location = "";
+        private string _foundBy = "";
         private string _employeeName = "";
-        private DateTime _dateLost;
+        private string _location = "";
+        private DateTime _dateFound;
 
 
-        public FileAsLostViewModel()
+        public FileAsFoundViewModel()
         {
-            _fileAsLostCommand = new RelayCommand(SubmitCreateRequest);
-            _lostItemProvider = new LostItemProvider();
+            _fileAsFoundCommand = new RelayCommand(SubmitCreateRequest);
+            _foundItemProvider = new FoundItemProvider();
         }
 
 
@@ -41,11 +40,9 @@ namespace LostAndFound.ViewModels
         {
             if (String.IsNullOrWhiteSpace(Name)) {
                 this.ShowWarning("A name is required!");
-            } else if (String.IsNullOrWhiteSpace(Email) && String.IsNullOrWhiteSpace(PhoneNumber)) {
-                this.ShowWarning("Please enter an email address OR a phone number by which to contact the owner!");
             } else {
-                _lostItemProvider.CreateLostItem(DateTime.Now, Description, Location, Name, PhoneNumber, Email, EmployeeName);
-                SearchForLostItemView.reloadList = true;
+                _foundItemProvider.CreateFoundItem(DateTime.Now, Description, Location, FoundBy, EmployeeName);
+                ReportFoundView.reloadList = true;
                 Window window = (Window)obj;
                 window.Close();
             }
@@ -59,10 +56,10 @@ namespace LostAndFound.ViewModels
         }
 
 
-        public ICommand FileAsLostCommand
+        public ICommand FileAsFoundCommand
         {
-            get { return _fileAsLostCommand; }
-            set { _fileAsLostCommand = value; }
+            get { return _fileAsFoundCommand; }
+            set { _fileAsFoundCommand = value; }
         }
 
 
@@ -77,8 +74,6 @@ namespace LostAndFound.ViewModels
                 _name = value;
             }
         }
-
-
         public string Description
         {
             get
@@ -103,17 +98,18 @@ namespace LostAndFound.ViewModels
             }
         }
 
-        public string Email
+        public string FoundBy
         {
             get
             {
-                return _email;
+                return _foundBy;
             }
             set
             {
-                _email = value;
+                _foundBy = value;
             }
         }
+
 
         public string EmployeeName
         {
@@ -126,28 +122,16 @@ namespace LostAndFound.ViewModels
                 _employeeName = value;
             }
         }
-        public string PhoneNumber
-        {
-            get
-            {
-                return _phoneNumber;
-            }
-            set
-            {
-                _phoneNumber = value;
-            }
-        }
 
-
-        public DateTime DateLost
+        public DateTime DateFound
         {
             get 
             { 
-                return _dateLost;
+                return _dateFound;
             }
             set
             {
-                _dateLost = value;
+                _dateFound = value;
             }
         }
 

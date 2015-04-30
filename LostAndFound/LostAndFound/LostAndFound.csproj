@@ -76,6 +76,7 @@
     <Compile Include="Services\Providers\FoundItemProvider.cs" />
     <Compile Include="Services\Providers\DisposedItemProvider.cs" />
     <Compile Include="Services\Providers\LostItemProvider.cs" />
+    <Compile Include="ViewModels\FileAsFoundViewModel.cs" />
     <Compile Include="ViewModels\FileAsLostViewModel.cs" />
     <Compile Include="ViewModels\ReportFoundViewModel.cs" />
     <Compile Include="Views\Controls\ExpiredItemActionUserControl.xaml.cs">

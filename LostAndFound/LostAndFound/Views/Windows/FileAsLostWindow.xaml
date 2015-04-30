@@ -3,7 +3,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:viewModels="clr-namespace:LostAndFound.ViewModels"
-        Height="400" Width="270" Title="File As Lost">
+        Height="470" Width="270" Title="File As Lost">
 
     <Window.DataContext>
         <viewModels:FileAsLostViewModel></viewModels:FileAsLostViewModel>
@@ -13,7 +13,10 @@
         <StackPanel Orientation="Vertical" Grid.Row="1">
             <TextBlock Text="Person's Name" Margin="25,10,0,0"/>
             <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding Name}"/>
-            
+
+            <TextBlock Text="Add Location" Margin="25,10,0,0"></TextBlock>
+            <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding Location}"/>
+
             <TextBlock Text="Add Description" Margin="25,10,0,0"></TextBlock>
             <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding Description}"/>
 
@@ -26,8 +29,11 @@
             <TextBlock Text="Phone Number" Margin="25,10,0,0"></TextBlock>
             <TextBox Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding PhoneNumber}"></TextBox>
 
+            <TextBlock Text="Employee Name" Margin="25,10,0,0"></TextBlock>
+            <TextBox Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding EmployeeName}"></TextBox>
+
         </StackPanel>
-        <Button Padding="8,8,8,8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="3" Command="{Binding FileAsLostCommand}" CommandParameter="{Binding ElementName=LostWindow}">
+        <Button Margin="10" Padding="8,8,8,8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="3" Command="{Binding FileAsLostCommand}" CommandParameter="{Binding ElementName=LostWindow}">
             <TextBlock Text="File Lost Item"/>
         </Button>
 
