@@ -63,6 +63,7 @@ namespace LostAndFound.Views.Controls
             fileAsFoundWindow.Owner = Application.Current.MainWindow;
             fileAsFoundWindow.Show();
             ReportFoundView.reloadList = true;
+            ExpiredItemsView.reloadList = true;
         }
         private void claimClick(object sender, RoutedEventArgs e)
         {

@@ -28,7 +28,8 @@ namespace LostAndFound.Views
         private static List<FoundItem> _cachedFoundItems;
         public static List<FoundItem> _foundItems;
         public static bool reloadList;
-        private MyItem itemBasic;
+        public static List<MyItem> _selectedItemsList;
+
 
         public ExpiredItemsView()
         {
@@ -42,7 +43,19 @@ namespace LostAndFound.Views
 
         public void selectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string text1 = (e.AddedItems[0] as ComboBoxItem).Content as string;
+            if (reloadList)
+            {
+                reloadListView();
+            }
+            else
+            {
+                reloadExpiredList();
+            }
+        }
+
+        private void reloadExpiredList()
+        {
+            string text1 = dateDDL.SelectedValue.ToString();
             if (text1.Equals("7 days ago")) farBack = 7;
             if (text1.Equals("30 days ago")) farBack = 30;
             if (text1.Equals("60 days ago")) farBack = 60;
@@ -53,13 +66,21 @@ namespace LostAndFound.Views
             foreach (var item in _foundItems)
             {
                 TimeSpan ts = dateTime - item.DateReported;
-                int td = ts.Days; 
+                int td = ts.Days;
                 if (td >= farBack)
                 {
                     ExpiredItemListView.Items.Add(createMyItem(item));
                 }
             }
+        }
 
+        private void reloadListView()
+        {
+            reloadList = false;
+            var foundItemProvider = new FoundItemProvider();
+            _foundItems = null;
+            _foundItems = foundItemProvider.GetFoundItems();
+            reloadExpiredList();
         }
 
         private MyItem createMyItem(FoundItem item)
@@ -75,13 +96,28 @@ namespace LostAndFound.Views
                 tmp2 += desc.Name + " ";
             }
             MyItem t;
-            t = new MyItem { desc = tmp1, loc = tmp2, date = item.DateReported.ToString("MM/dd/yyyy"), isVisible = true, isSelected = false };
+            t = new MyItem { desc = tmp1, loc = tmp2, date = item.DateReported.ToString("MM/dd/yyyy"), name = item.Name, isVisible = true, isSelected = false };
             return t;
         }
 
         private void itemClicked(object sender, SelectionChangedEventArgs e)
         {
-
+            if (reloadList)
+            {
+                reloadListView();
+            }
+            else
+            {
+                _selectedItemsList = new List<MyItem>();
+                foreach (MyItem i in ExpiredItemListView.Items)
+                {
+                    bool test = i.isSelected;
+                    if (i.isSelected)
+                    {
+                        _selectedItemsList.Add(i);
+                    }
+                }
+            }
         }
     }
 }

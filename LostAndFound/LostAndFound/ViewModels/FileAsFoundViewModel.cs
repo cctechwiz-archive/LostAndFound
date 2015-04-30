@@ -43,6 +43,7 @@ namespace LostAndFound.ViewModels
             } else {
                 _foundItemProvider.CreateFoundItem(DateTime.Now, Description, Location, FoundBy, EmployeeName);
                 ReportFoundView.reloadList = true;
+                ExpiredItemsView.reloadList = true;
                 Window window = (Window)obj;
                 window.Close();
             }

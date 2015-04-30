@@ -26,7 +26,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Margin="25 25 25 25" Grid.Column="0">
-            <ComboBox Text="View expired items from..."  Width="200" HorizontalAlignment="Left" IsEditable="True" IsReadOnly="True" SelectionChanged="selectionChanged">
+            <ComboBox x:Name="dateDDL" Text="View expired items from..."  Width="200" HorizontalAlignment="Left" IsEditable="True" IsReadOnly="True" SelectionChanged="selectionChanged" SelectedValuePath="Content">
                 <ComboBoxItem Name="cbi1" >7 days ago</ComboBoxItem>
                 <ComboBoxItem Name="cbi2">30 days ago</ComboBoxItem>
                 <ComboBoxItem Name="cbi3">60 days ago</ComboBoxItem>
@@ -35,7 +35,12 @@
             </ComboBox>
             
             <!-- TODO: Below the combobox (whatever), we should add the expired tags UserControl. -->
-            <ListView x:Name="ExpiredItemListView" Height="350" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding FoundItemList}" SelectionChanged="itemClicked">
+            <ListView x:Name="ExpiredItemListView" Height="350" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding FoundItemList}" SelectionChanged="itemClicked" SelectionMode="Multiple">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="IsSelected" Value="{Binding isSelected}"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding desc}" Header="Description" Width="210"/>

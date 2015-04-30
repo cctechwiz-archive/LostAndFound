@@ -78,6 +78,7 @@ namespace LostAndFound.Views
                         fip.UpdateFoundItem(item, fi);
                         dateTime = DateTime.Now;
                         reloadList = true;
+                        ExpiredItemsView.reloadList = true;
                         var disposedItemProvider = new DisposedItemProvider();
                         disposedItemProvider.CreateDisposedItem(item.DateReported, dateTime, newDesc, newLoc, "", "", "", "", "");
                     }
