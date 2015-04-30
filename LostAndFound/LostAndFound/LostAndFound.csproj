@@ -65,6 +65,7 @@
     <Compile Include="Models\DescriptionTag.cs" />
     <Compile Include="Models\DisposedItem.cs" />
     <Compile Include="Models\DisposedTag.cs" />
+    <Compile Include="Models\MyItem.cs" />
     <Compile Include="Models\StorageTag.cs" />
     <Compile Include="Models\LostItem.cs" />
     <Compile Include="Models\FoundItem.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Services\Providers\FoundItemProvider.cs" />
     <Compile Include="Services\Providers\DisposedItemProvider.cs" />
     <Compile Include="Services\Providers\LostItemProvider.cs" />
+    <Compile Include="ViewModels\FileAsFoundViewModel.cs" />
     <Compile Include="ViewModels\FileAsLostViewModel.cs" />
     <Compile Include="ViewModels\ReportFoundViewModel.cs" />
     <Compile Include="Views\Controls\ExpiredItemActionUserControl.xaml.cs">
@@ -94,6 +96,9 @@
     </Compile>
     <Compile Include="Views\Dialogs\GenericDialog.xaml.cs">
       <DependentUpon>GenericDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\FileAsFoundWindow.xaml.cs">
+      <DependentUpon>FileAsFoundWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\FileAsLostWindow.xaml.cs">
       <DependentUpon>FileAsLostWindow.xaml</DependentUpon>
@@ -149,6 +154,10 @@
     <Page Include="Views\Dialogs\GenericDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\FileAsFoundWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Windows\FileAsLostWindow.xaml">
       <SubType>Designer</SubType>

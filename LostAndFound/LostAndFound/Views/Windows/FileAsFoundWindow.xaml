@@ -1,12 +1,12 @@
-﻿<Controls:MetroWindow x:Class="LostAndFound.Views.Windows.FileAsLostWindow" x:Name="LostWindow"
+﻿<Controls:MetroWindow x:Class="LostAndFound.Views.Windows.FileAsFoundWindow" x:Name="FoundWindow"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:viewModels="clr-namespace:LostAndFound.ViewModels"
-        Height="470" Width="270" Title="File As Lost">
+        Height="420" Width="270" Title="File As Found">
 
     <Window.DataContext>
-        <viewModels:FileAsLostViewModel></viewModels:FileAsLostViewModel>
+        <viewModels:FileAsFoundViewModel></viewModels:FileAsFoundViewModel>
     </Window.DataContext>
     
     <Grid>
@@ -20,21 +20,18 @@
             <TextBlock Text="Add Description" Margin="25,10,0,0"></TextBlock>
             <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding Description}"/>
 
-            <TextBlock Text="Date Lost" Margin="25,10,0,0"></TextBlock>
+            <TextBlock Text="Date Found" Margin="25,10,0,0"></TextBlock>
             <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding DateLost}"/>
 
-            <TextBlock Text="Email" Margin="25,10,0,0"></TextBlock>
-            <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding Email}"/>
+            <TextBlock Text="Found By" Margin="25,10,0,0"></TextBlock>
+            <TextBox  Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding FoundBy}"/>
             
-            <TextBlock Text="Phone Number" Margin="25,10,0,0"></TextBlock>
-            <TextBox Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding PhoneNumber}"></TextBox>
-
             <TextBlock Text="Employee Name" Margin="25,10,0,0"></TextBlock>
             <TextBox Width="150" Margin="0,2,0,0" HorizontalAlignment="Center" Text="{Binding EmployeeName}"></TextBox>
 
         </StackPanel>
-        <Button Margin="10" Padding="8,8,8,8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="3" Command="{Binding FileAsLostCommand}" CommandParameter="{Binding ElementName=LostWindow}">
-            <TextBlock Text="File Lost Item"/>
+        <Button Margin="10" Padding="8,8,8,8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="3"  Command="{Binding FileAsFoundCommand}" CommandParameter="{Binding ElementName=FoundWindow}">
+            <TextBlock Text="File Found Item"/>
         </Button>
 
     </Grid>

@@ -1,5 +1,7 @@
 ﻿using LostAndFound.Models;
 using LostAndFound.Services.Providers;
+using LostAndFound.Views.Windows;
+using LostAndFound.Views.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,66 +24,143 @@ namespace LostAndFound.Views
     /// </summary>
     public partial class ReportFoundView : UserControl
     {
+        private static List<FoundItem> _cachedFoundItems;
+        public static List<FoundItem> _foundItems;
+        public static bool reloadList;
+        private MyItem itemBasic;
+
         public ReportFoundView()
         {
+            reloadList = false;
+            FoundItemProvider _foundItemProvider = new FoundItemProvider();
+            _cachedFoundItems = _foundItemProvider.GetFoundItems();
+            _foundItems = new List<FoundItem>(_foundItemProvider.GetFoundItems());
             InitializeComponent();
-            // Testing Providers
-            /*
-            var dateTime = new DateTime(2012, 5, 12);
-            var foundItemProvider = new FoundItemProvider();
-            var lostItemProvider = new LostItemProvider();
-            var disposedItemProvider = new DisposedItemProvider();
-            var FoundItems = foundItemProvider.GetFoundItems();
-            var LostItems = lostItemProvider.GetLostItems();
-            var DisposedItems = disposedItemProvider.GetDisposedItems();
-
-            DescriptionTag d1 = new DescriptionTag("dtag1");
-            DescriptionTag d2 = new DescriptionTag("dtag2");
-            String dTagString = "dtag1 dtag2";
-            List<DescriptionTag> dTags = new List<DescriptionTag>();
-            dTags.Add(d1);
-            dTags.Add(d2);
-            LocationTag l1 = new LocationTag("ltag1");
-            LocationTag l2 = new LocationTag("ltag2");
-            String lTagString = "ltag1 ltag2";
-            List<LocationTag> lTags = new List<LocationTag>();
-            lTags.Add(l1);
-            lTags.Add(l2);
-            var fi = new FoundItem(dateTime, dTags, lTags, "Joe", "Rob");
-            var li = new LostItem(dateTime, dTags, lTags, "Joe", "Rob");
-            var di = new DisposedItem(dateTime, dateTime, dTags, lTags, "Joe", "na", "na", "Rob", "Incinerator");
-            DescriptionTag d1a = new DescriptionTag("dtag1a");
-            DescriptionTag d2a = new DescriptionTag("dtag2a");
-            List<DescriptionTag> dTagsa = new List<DescriptionTag>();
-            dTagsa.Add(d1a);
-            dTagsa.Add(d2a);
-            LocationTag l1a = new LocationTag("ltag1a");
-            LocationTag l2a = new LocationTag("ltag2a");
-            List<LocationTag> lTagsa = new List<LocationTag>();
-            lTagsa.Add(l1a);
-            lTagsa.Add(l2a);
-            var dateTime2 = new DateTime(2014, 8, 9);
-            var fi2 = new FoundItem(dateTime2, dTagsa, lTagsa, "Joey", "Robby");
-            var li2 = new LostItem(dateTime2, dTagsa, lTagsa, "Joey", "Robby");
-            var di2 = new DisposedItem(dateTime2, dateTime2, dTagsa, lTagsa, "Joey", "na", "na", "Robby", "Trash");
-
-            var dateTime3 = new DateTime(1, 1, 1);
-            var fi3 = new FoundItem(dateTime3, dTagsa, lTagsa, "Joey", "Robby");
-            var li3 = new LostItem(dateTime3, dTagsa, lTagsa, "Joey", "Robby");
-            var di3 = new DisposedItem(dateTime3, dateTime3, dTagsa, lTagsa, "Joey", "na", "na", "Robby", "Trash");
-            */
-            //FoundItems.Add(foundItemProvider.CreateFoundItem(dateTime, dTagString, lTagString, "Joe", "Rob"));
-            //foundItemProvider.UpdateFoundItem(fi, fi2);
-            //No Delete, must use update with unusual value????
-            //foundItemProvider.UpdateFoundItem(fi2, fi3);
-            //LostItems.Add(lostItemProvider.CreateLostItem(dateTime, dTagString, lTagString, "Joe", "na", "na", "Rob"));
-            //lostItemProvider.UpdateLostItem(li, li2);
-            //No Delete, must use update with unusual value????
-            //lostItemProvider.UpdateLostItem(li2, li3);
-            //DisposedItems.Add(disposedItemProvider.CreateDisposedItem(dateTime, dateTime, dTagString, lTagString, "Joe", "na", "na", "Rob", "Incinerator"));
-            //disposedItemProvider.UpdateDisposedItem(di, di2);
-            //No Delete, must use update with unusual value????
-            //disposedItemProvider.UpdateDisposedItem(di2, di3);
+            foreach (var item in _foundItems)
+            {
+                FoundItemListView.Items.Add(createMyItem(item));
+            }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            FileAsLostWindow fileAsLostWindow = new FileAsLostWindow();
+            fileAsLostWindow.Owner = Application.Current.MainWindow;
+            fileAsLostWindow.Show();
+            SearchForLostItemView.reloadList = true;
+        }
+
+        private void Button_Click2(object sender, RoutedEventArgs e)
+        {
+            if (itemBasic != null)
+            {
+                foreach (var item in _foundItems)
+                {
+                    DescriptionTag[] newDescs = item.DescriptionTags.ToArray();
+                    string newDesc = "";
+                    for (int i = 0; i < newDescs.Length; i++)
+                    {
+                        newDesc += newDescs[i].Name;
+                        if (i < newDescs.Length - 1) newDesc += " ";
+                    }
+                    LocationTag[] newLocs = item.LocationTags.ToArray();
+                    string newLoc = "";
+                    for (int i = 0; i < newLocs.Length; i++)
+                    {
+                        newLoc += newLocs[i].Name;
+                        if (i < newLocs.Length - 1) newLoc += " ";
+                    }
+                    if (itemBasic.date == item.DateReported.ToString("MM/dd/yyyy") && itemBasic.desc.Contains(newDesc) && itemBasic.loc.Contains(newLoc))
+                    {
+                        var dateTime = new DateTime(1, 1, 1);
+                        FoundItem fi = new FoundItem(dateTime, item.DescriptionTags, item.LocationTags, item.Name, item.Employee);
+                        FoundItemProvider fip = new FoundItemProvider();
+                        fip.UpdateFoundItem(item, fi);
+                        dateTime = DateTime.Now;
+                        reloadList = true;
+                        ExpiredItemsView.reloadList = true;
+                        var disposedItemProvider = new DisposedItemProvider();
+                        disposedItemProvider.CreateDisposedItem(item.DateReported, dateTime, newDesc, newLoc, "", "", "", "", "");
+                    }
+                }
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (reloadList)
+            {
+                reloadListView();
+            }
+            else
+            {
+                TextBox textBox = (TextBox)sender;
+                if (null != textBox)
+                {
+                    foreach (var item in FoundItemListView.Items)
+                    {
+                        MyItem i = (MyItem)item;
+                        i.isSelected = false;
+                    }
+                    FoundItemListView.Items.Clear();
+                    foreach (var item in _foundItems)
+                    {
+                        MyItem mItem = createMyItem(item);
+                        if (mItem.desc.Contains(textBox.Text))
+                        {
+                            FoundItemListView.Items.Add(mItem);
+                        }
+                    }
+                }
+            }
+        }
+
+        private MyItem createMyItem(FoundItem item)
+        {
+            String tmp1 = "";
+            foreach (var desc in item.DescriptionTags)
+            {
+                tmp1 += desc.Name + " ";
+            }
+            String tmp2 = "";
+            foreach (var desc in item.LocationTags)
+            {
+                tmp2 += desc.Name + " ";
+            }
+            MyItem t;
+            t = new MyItem { desc = tmp1, loc = tmp2, date = item.DateReported.ToString("MM/dd/yyyy"), isVisible = true, isSelected = false };
+            return t;
+        }
+
+        private void reloadListView()
+        {
+            reloadList = false;
+            _foundItems = null;
+            FoundItemProvider fip = new FoundItemProvider();
+            _foundItems = fip.GetFoundItems();
+            FoundItemListView.Items.Clear();
+            foreach (var item in _foundItems)
+            {
+                FoundItemListView.Items.Add(createMyItem(item));
+            }
+        }
+
+        private void itemClicked(object sender, SelectionChangedEventArgs e)
+        {
+            if (reloadList)
+            {
+                reloadListView();
+            }
+            else
+            {
+                if (e.AddedItems.Count > 0)
+                {
+                    var item = (MyItem)e.AddedItems[0];
+                    itemBasic = item;
+                }
+            }
+        }
+
+
     }
 }

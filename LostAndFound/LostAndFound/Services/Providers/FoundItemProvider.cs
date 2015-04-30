@@ -117,7 +117,7 @@ namespace LostAndFound.Services.Providers
             var updateCommandString = "UPDATE [FoundItems$] SET DateFound = '" + newFoundItem.DateReported.ToString("MM/dd/yyyy") + "', ItemDescription = '" + newDesc + "', LocationItemFound = '" + newLoc +
                 "', FoundBy = '" + newFoundItem.Reportee + "', RecordedBy = '" + newFoundItem.Employee + "' " +
                 "WHERE DateFound = '" + oldFoundItem.DateReported.ToString("MM/dd/yyyy") + "' AND ItemDescription = '" + oldDesc + "' AND LocationItemFound = '" + oldLoc +
-                "' AND FoundBy = '" + oldFoundItem.Reportee + "' AND RecordedBy = '" + oldFoundItem.Employee + "'";
+                "'";
             OleDbCommand myCommand = new OleDbCommand();
             itemsConnection.Open();
             myCommand.Connection = itemsConnection;

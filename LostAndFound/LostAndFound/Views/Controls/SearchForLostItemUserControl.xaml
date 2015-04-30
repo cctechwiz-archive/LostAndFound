@@ -10,30 +10,31 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="450" />
+            <ColumnDefinition Width="550" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="25,25,25,25">
             <TextBox TextChanged="TextBox_TextChanged" />
             <CheckBox Margin="0,2,0,7">Show disposed</CheckBox>
-            <ListView x:Name="LostItemListView" Height="400" ItemsSource="{Binding LostItemList}" >
+            <ListView x:Name="LostItemListView" Height="350" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding LostItemList}" SelectionChanged="itemClicked">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="IsSelected" Value="{Binding isSelected}"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Items Reported as Lost">
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" Width="120"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding DateReported}" Header="Date Reported" Width="110"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding PhoneNumber}" Header="Phone Number" Width="120"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Email}" Header="Email"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding name}" Header="Name" Width="110"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding desc}" Header="Description" Width="260"/>                    
+                        <GridViewColumn DisplayMemberBinding="{Binding date}" Header="Date Reported" Width="110"/>
                     </GridView>
                 </ListView.View>
             </ListView>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="25,25,25,25">
             
-            <local:LostItemDetailsUserControl />
+            <local:LostItemDetailsUserControl HorizontalAlignment="Right"/>
 
-            <Button Padding="25,10,25,10" Click="Button_Click" MaxWidth="100" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                <TextBlock Text="File as Lost"/>
-            </Button>
             
         </StackPanel>
     </Grid>
